@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="san_marino">#4356B4</color>
+    <color name="turquoise">#3DCFCF</color>
+    <color name="wild_sand">#F6F6F6</color>
+    <color name="silver">#CACACA</color>
+    <drawable name="sponsored_article_background">#F6F6F6</drawable>
 </resources>
