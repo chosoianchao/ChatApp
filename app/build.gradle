@@ -6,8 +6,9 @@ plugins {
 android {
     compileSdk 31
     buildFeatures {
-        viewBinding  true
+        viewBinding true
     }
+
     defaultConfig {
         applicationId "com.rikkei.tranning.basekotlin"
         minSdk 21
@@ -34,6 +35,7 @@ android {
 }
 
 dependencies {
+    def navigation_version = "2.3.5"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
@@ -44,13 +46,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
 
-
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.4.0")
 
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
-    implementation("androidx.fragment:fragment-ktx:1.4.0")
 }

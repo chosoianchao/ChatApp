@@ -1,30 +1,35 @@
 package com.rikkei.tranning.basekotlin.activity
 
-import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.commit
+import android.view.View
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.rikkei.tranning.basekotlin.R
-import com.rikkei.tranning.basekotlin.base.BaseFragment
-import com.rikkei.tranning.basekotlin.fragment.SplashFragment
+import com.rikkei.tranning.basekotlin.base.BaseActivity
+import com.rikkei.tranning.basekotlin.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        setContentView(R.layout.activity_main)
-showFragment(SplashFragment(), SplashFragment.TAG, false)
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
+    private val navHostFragment by lazy {
+        supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+    }
+    private val navController by lazy { navHostFragment.navController }
+
+    override fun initViewBinding(view: View): ActivityMainBinding {
+        return ActivityMainBinding.bind(view)
     }
 
-    private fun showFragment(fragment: Fragment, tag: String, isBacked: Boolean) {
-        supportFragmentManager.commit {
-            replace(R.id.fragment_container, fragment)
-            if(isBacked) addToBackStack(tag)
+    override fun getLayOutId(): Int {
+        return R.layout.activity_main
+    }
+
+    override fun initViews() {
+        mBinding?.bottomNavigation?.apply {
+            setupWithNavController(navController)
+        }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.splashFragment) {
+                mBinding?.groupBottomNav?.visibility = View.VISIBLE
+            }
         }
     }
-
-
 }
