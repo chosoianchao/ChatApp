@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.viewbinding.ViewBinding
 
 
@@ -12,8 +13,8 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         val view: View = LayoutInflater.from(this).inflate(getLayOutId(), null)
-
         mBinding = initViewBinding(view)
 
         setContentView(view)

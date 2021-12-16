@@ -17,7 +17,7 @@
     <string name="text_signup_now">     Signup now</string>
     <string name="text_register">Register</string>
     <string name="text_name">Full name</string>
-    <string name="text_yourname_gmail_com">yourname@gmail.com</string>
+    <string name="text_your_name_gmail_com">yourname@gmail.com</string>
     <string name="text_agree">I agree to the</string>
     <string name="text_policy">policies</string>
     <string name="and">and</string>
@@ -28,4 +28,10 @@
     <string name="success_login">Login successful</string>
     <string name="text_confirm">Confirm</string>
     <string name="message">Message</string>
+    <string name="text_validate_email">Please enter your email</string>
+    <string name="text_validate_name">Please enter your name</string>
+    <string name="text_write_valid_email">Write a valid email</string>
+    <string name="text_send_to_email">Please check your email to change password</string>
+    <string name="text_password_validate">Please enter your password
+or Password is needed 6 characters</string>
 </resources>

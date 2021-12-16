@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.rikkei.tranning.basekotlin.viewmodel.LoginModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/image_logo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_mail_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <TextView
+            android:id="@+id/text_discovery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:text="@string/text_start_with_awesome_chat"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp_26"
+            app:layout_constraintBottom_toTopOf="@id/text_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/image_logo"
+            app:layout_constraintTop_toBottomOf="@+id/image_logo" />
+
+        <TextView
+            android:id="@+id/text_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="start"
+            android:text="@string/text_login"
+            android:textColor="@color/san_marino"
+            android:textSize="@dimen/sp_32"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/text_discovery"
+            app:layout_constraintStart_toStartOf="@id/text_discovery"
+            app:layout_constraintTop_toBottomOf="@id/text_discovery" />
+
+        <TextView
+            android:id="@+id/text_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_regular"
+            android:text="@string/text_email"
+            android:textAllCaps="true"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toTopOf="@id/edit_email"
+            app:layout_constraintEnd_toEndOf="@id/text_discovery"
+            app:layout_constraintStart_toStartOf="@id/text_discovery"
+            app:layout_constraintTop_toBottomOf="@id/text_login"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <EditText
+            android:id="@+id/edit_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="@null"
+            android:fontFamily="@font/lato_regular"
+            android:hint="@string/text_your_email"
+            android:inputType="textEmailAddress"
+            android:maxLength="30"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/silver"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintBottom_toTopOf="@id/text_password"
+            app:layout_constraintEnd_toEndOf="@id/text_discovery"
+            app:layout_constraintStart_toStartOf="@id/text_discovery"
+            app:layout_constraintTop_toBottomOf="@id/text_email" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:src="@drawable/ic_mail_login"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_email"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@+id/edit_email"
+            app:layout_constraintHeight_percent="0.03"
+            app:layout_constraintTop_toTopOf="@id/edit_email"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/text_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:fontFamily="@font/lato_regular"
+            android:text="@string/text_password"
+            android:textAllCaps="true"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toTopOf="@id/edit_password"
+            app:layout_constraintEnd_toEndOf="@id/text_discovery"
+            app:layout_constraintStart_toStartOf="@id/text_discovery"
+            app:layout_constraintTop_toBottomOf="@+id/edit_email" />
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:fontFamily="@font/lato_regular"
+            android:hint="@string/text_pass_hint"
+            android:inputType="textPassword"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/silver"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintBottom_toTopOf="@id/button_login"
+            app:layout_constraintEnd_toEndOf="@id/text_discovery"
+            app:layout_constraintStart_toStartOf="@id/text_discovery"
+            app:layout_constraintTop_toBottomOf="@+id/text_password"
+            tools:ignore="Autofill" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:src="@drawable/ic_password"
+            app:layout_constraintBottom_toBottomOf="@id/edit_password"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/edit_password"
+            app:layout_constraintHeight_percent="0.03"
+            app:layout_constraintTop_toTopOf="@id/edit_password"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/text_forget_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:fontFamily="@font/lato_bold"
+            android:gravity="end"
+            android:text="@string/text_forgot_password_1"
+            android:textColor="@color/san_marino"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toEndOf="@id/text_discovery"
+            app:layout_constraintStart_toStartOf="@id/text_discovery"
+            app:layout_constraintTop_toBottomOf="@id/edit_password" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_login"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:backgroundTint="@color/san_marino"
+            android:fontFamily="@font/lato_regular"
+            android:gravity="center"
+            android:text="@string/text_login"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toTopOf="@id/text_no_account"
+            app:layout_constraintDimensionRatio="7:1"
+            app:layout_constraintEnd_toEndOf="@id/text_discovery"
+            app:layout_constraintStart_toStartOf="@id/text_discovery"
+            app:layout_constraintTop_toBottomOf="@+id/text_forget_password" />
+
+        <TextView
+            android:id="@+id/text_no_account"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:fontFamily="@font/lato_regular"
+            android:gravity="end"
+            android:text="@string/text_no_account"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/text_signup_now"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/text_discovery" />
+
+        <TextView
+            android:id="@+id/text_signup_now"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_6"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/text_signup_now"
+            android:textColor="@color/san_marino"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/text_no_account"
+            app:layout_constraintEnd_toEndOf="@id/text_discovery"
+            app:layout_constraintStart_toEndOf="@id/text_no_account"
+            app:layout_constraintTop_toTopOf="@id/text_no_account" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

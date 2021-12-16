@@ -2,12 +2,39 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_grap"
-    app:startDestination="@id/splashFragment">
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/loginFragment">
 
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.rikkei.tranning.basekotlin.fragment.SplashFragment"
-        android:label="SplashFragment"
-        tools:layout="@layout/splash" />
+        android:id="@+id/loginFragment"
+        android:name="com.rikkei.tranning.basekotlin.fragment.LoginFragment"
+        android:label="LoginFragment"
+        app:destination="@id/loginFragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotFragment"
+            app:destination="@id/forgotFragment"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.rikkei.tranning.basekotlin.fragment.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/forgotFragment"
+        android:name="com.rikkei.tranning.basekotlin.fragment.ForgotFragment"
+        android:label="ForgotFragment"
+        tools:layout="@layout/fragment_forget_password" />
 </navigation>
