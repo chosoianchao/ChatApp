@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_50"
+    android:background="@color/white"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_50"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_logout" />
+
+    <TextView
+        android:layout_width="@dimen/dp_86"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginStart="@dimen/dp_50"
+        android:text="@string/sign_out"
+        android:textColor="#C92323"
+        android:textSize="@dimen/sp_18" />
+</LinearLayout>

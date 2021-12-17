@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -13,20 +15,59 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_all_chat">
+        android:background="#F6F6F6">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_list_chat"
+        <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_50"
+            android:background="@drawable/bg_all_chat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_friend"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_30"
+            android:background="@drawable/bg_corners"
+            app:layout_constraintBottom_toTopOf="@id/rv_list_friend"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ic_view_search"
+            app:tabIndicatorColor="#4356B4"
+            app:tabSelectedTextColor="#4356B4">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/friend" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/all" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/request" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_friend"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_20"
             android:background="@drawable/bg_corners"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ic_view_search"
-            tools:listitem="@layout/item_all_chat" />
+            app:layout_constraintTop_toBottomOf="@id/tl_friend"
+            tools:listitem="@layout/item_all_friends" />
 
         <TextView
             android:id="@+id/textMessage"
@@ -35,21 +76,21 @@
             android:layout_marginTop="@dimen/dp_50"
             android:layout_marginEnd="@dimen/dp_50"
             android:fontFamily="@font/lato_regular"
-            android:text="@string/message"
+            android:text="@string/friends"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_30"
-            app:layout_constraintBottom_toBottomOf="@id/iv_create_new_message"
-            app:layout_constraintEnd_toStartOf="@id/iv_create_new_message"
+            app:layout_constraintBottom_toBottomOf="@id/iv_add_new_friends"
+            app:layout_constraintEnd_toStartOf="@id/iv_add_new_friends"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/iv_create_new_message"
+            android:id="@+id/iv_add_new_friends"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/dp_150"
+            android:layout_marginStart="150dp"
             android:layout_marginTop="@dimen/dp_50"
-            android:src="@drawable/create_new_message"
+            android:src="@drawable/ic_add_new_friend"
             app:layout_constraintBottom_toBottomOf="@id/textMessage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.06"
@@ -65,11 +106,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_100"
+            android:layout_marginTop="@dimen/dp_30"
             android:layout_marginEnd="@dimen/dp_20"
-            app:layout_constraintBottom_toTopOf="@id/rv_list_chat"
-            app:layout_constraintEnd_toEndOf="@id/iv_create_new_message"
+            app:layout_constraintBottom_toTopOf="@id/tl_friend"
+            app:layout_constraintEnd_toEndOf="@id/iv_add_new_friends"
             app:layout_constraintStart_toStartOf="@id/textMessage"
             app:layout_constraintTop_toBottomOf="@id/textMessage" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

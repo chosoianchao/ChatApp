@@ -1,18 +1,14 @@
 package com.rikkei.tranning.basekotlin.fragment
 
 import android.os.Bundle
-import android.util.Log
+import android.view.Window
+import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.base.BaseFragment
 import com.rikkei.tranning.basekotlin.databinding.FragmentLoginBinding
-import com.rikkei.tranning.basekotlin.model.User
 import com.rikkei.tranning.basekotlin.showToastShort
 import com.rikkei.tranning.basekotlin.viewmodel.LoginModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,8 +22,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     override val viewModel: LoginModel by viewModels()
 
     override fun initViews() {
+//        val window: Window = requireActivity().window
+//        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+//        window.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.white)
+        viewModel.accountExists(::accountExists)
 
-        getBackStackData("bundleKey", ::onResult)
+        getBackStackData(BUNDLE_KEY, ::onResult)
         viewBinding.buttonLogin.setOnClickListener {
             val email = viewBinding.editEmail.text.toString()
             val password = viewBinding.editPassword.text.toString()
@@ -48,28 +49,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         viewBinding.textSignupNow.setOnClickListener {
             openRegisterFragment()
         }
-        viewModel.readData()
     }
 
-    private fun readData(postReference: DatabaseReference) {
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                val post = dataSnapshot.getValue<User>()
-                // ...
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
-            }
-        }
-        postReference.addValueEventListener(postListener)
+    private fun accountExists() {
+        val action = LoginFragmentDirections.actionLoginFragmentToMainChatFragment()
+        findNavController().navigate(action)
     }
 
     private fun onResult(bundle: Bundle) {
-        val m = bundle.getString("email")
-        val p = bundle.getString("password")
+        val m = bundle.getString(EMAIL)
+        val p = bundle.getString(PASSWORD)
         viewBinding.editEmail.setText(m)
         viewBinding.editPassword.setText(p)
     }
@@ -90,8 +79,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private fun loginSuccess() {
         context?.showToastShort(getString(R.string.success_login))
-//        val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
-//        findNavController().navigate(action)
+        val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+        findNavController().navigate(action)
     }
 
     override fun initData() {
@@ -99,5 +88,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@LoginFragment.viewModel
         }
+    }
+
+    companion object {
+        private const val EMAIL: String = "email"
+        private const val BUNDLE_KEY: String = "bundleKey"
+        private const val PASSWORD: String = "password"
     }
 }

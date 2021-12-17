@@ -1,6 +1,5 @@
 package com.rikkei.tranning.basekotlin.viewmodel
 
-import android.util.Log
 import com.rikkei.tranning.basekotlin.base.BaseViewModel
 import com.rikkei.tranning.basekotlin.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,23 +40,18 @@ class RegisterModel @Inject constructor() : BaseViewModel() {
         auth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener {
             if (it.isSuccessful) {
                 actionSuccess()
-                updateData(email)
+                updateData(name, email)
             }
         }?.addOnFailureListener {
             actionFailed()
         }
     }
 
-    private fun updateData(email: String) {
-        val currentID = auth?.currentUser?.uid
-        if (currentID != null) {
-            databaseReference?.child("user")?.child(currentID)?.child("username")?.setValue(email)?.addOnCompleteListener {
-                Log.d("TAG", "updateData: ")
-            }?.addOnFailureListener {
-                Log.d("TAG", "updateData: ")
-
-            }
-        }
+    private fun updateData(name: String, email: String) {
+        val mRef =
+            mUser?.uid?.let { databaseReference?.database?.reference?.child(USERS)?.child(it) }
+        mRef?.child(NAME)?.setValue(name)
+        mRef?.child(EMAIL)?.setValue(email)
     }
 
     companion object {
@@ -66,5 +60,8 @@ class RegisterModel @Inject constructor() : BaseViewModel() {
         const val ERROR_NAME: Int = 403
         const val ERROR_EMAIL: Int = 404
         const val SUCCESS: Int = 201
+        const val USERS: String = "Users"
+        const val EMAIL: String = "Email"
+        const val NAME: String = "Name"
     }
 }

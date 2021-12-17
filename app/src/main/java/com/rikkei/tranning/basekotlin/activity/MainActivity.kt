@@ -8,6 +8,7 @@ import com.rikkei.tranning.basekotlin.base.BaseActivity
 import com.rikkei.tranning.basekotlin.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -28,10 +29,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mBinding?.bottomNavigation?.apply {
             setupWithNavController(navController)
         }
-//        navController.addOnDestinationChangedListener { _, destination, _ ->
-//            if (destination.id == R.id.splashFragment) {
-//                mBinding?.groupBottomNav?.visibility = View.VISIBLE
-//            }
-//        }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.mainChatFragment) {
+                mBinding?.groupBottomNav?.visibility = View.VISIBLE
+            }
+        }
     }
 }

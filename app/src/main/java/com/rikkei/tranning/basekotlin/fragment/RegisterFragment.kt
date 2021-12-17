@@ -1,6 +1,5 @@
 package com.rikkei.tranning.basekotlin.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -23,7 +22,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     override val viewModel: RegisterModel by viewModels()
 
 
-
     override fun initData() {
         with(viewBinding) {
             lifecycleOwner = viewLifecycleOwner
@@ -33,9 +31,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     override fun initViews() {
         viewBinding.buttonRegister.setOnClickListener {
-             val name = viewBinding.editName.text.toString()
-             val email = viewBinding.editEmail.text.toString()
-             val password = viewBinding.editPassword.text.toString()
+            val name = viewBinding.editName.text.toString()
+            val email = viewBinding.editEmail.text.toString()
+            val password = viewBinding.editPassword.text.toString()
             val rs = viewModel.validate(name, email, password)
             if (rs == ERROR_NAME) {
                 context?.showToastShort(getString(R.string.text_validate_name))
@@ -63,13 +61,19 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         val password = viewBinding.editPassword.text.toString()
         context?.showToastShort(getString(R.string.success_register))
         val bundle: Bundle = Bundle().apply {
-            putString("email", email)
-            putString("password", password)
+            putString(EMAIL, email)
+            putString(PASSWORD, password)
         }
-        setBackStackData("bundleKey", bundle, true)
+        setBackStackData(BUNDLE_KEY, bundle, true)
     }
 
     private fun registerFailed() {
         context?.showToastShort(getString(R.string.error_something_wrong))
+    }
+
+    companion object {
+        private const val EMAIL: String = "email"
+        private const val BUNDLE_KEY: String = "bundleKey"
+        private const val PASSWORD: String = "password"
     }
 }

@@ -34,4 +34,18 @@
     <string name="text_send_to_email">Please check your email to change password</string>
     <string name="text_password_validate">Please enter your password
 or Password is needed 6 characters</string>
+    <string name="version">Version</string>
+    <string name="_1_0_0">1.0.0</string>
+    <string name="english">English</string>
+    <string name="language">Language</string>
+    <string name="notify">Notify</string>
+    <string name="sign_out">Sign out</string>
+    <string name="looking_for_friends">Looking for friends…</string>
+    <string name="looking_for_message">Looking for message…</string>
+    <string name="friends">Friends</string>
+    <string name="name">Nguyễn Hữu Thắng</string>
+    <string name="request">Request</string>
+    <string name="all">All</string>
+    <string name="friend">Friend</string>
+    <string name="text_message">Message</string>
 </resources>

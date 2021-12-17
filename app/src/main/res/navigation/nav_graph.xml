@@ -26,6 +26,13 @@
             app:exitAnim="@animator/slide_out_left"
             app:popEnterAnim="@animator/slide_in_left"
             app:popExitAnim="@animator/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainChatFragment"
+            app:destination="@id/mainChatFragment"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -37,4 +44,9 @@
         android:name="com.rikkei.tranning.basekotlin.fragment.ForgotFragment"
         android:label="ForgotFragment"
         tools:layout="@layout/fragment_forget_password" />
+    <fragment
+        android:id="@+id/mainChatFragment"
+        android:name="com.rikkei.tranning.basekotlin.fragment.MainChatFragment"
+        android:label="MainChatFragment"
+        tools:layout="@layout/fragment_main_chat" />
 </navigation>

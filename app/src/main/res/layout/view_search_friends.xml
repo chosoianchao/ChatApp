@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="351dp"
+    android:layout_width="350dp"
     android:layout_height="42dp"
     android:background="@drawable/bg_search"
     android:gravity="center|start"
@@ -10,16 +10,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_20"
+        android:contentDescription="@null"
         android:src="@drawable/ic_search" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/dp_10"
-        android:hint="dsadasdasdaa"
         android:layout_marginEnd="@dimen/dp_20"
         android:backgroundTint="@android:color/black"
         android:fontFamily="@font/lato_regular"
+        android:hint="@string/looking_for_friends"
+        android:importantForAutofill="no"
+        android:inputType="text"
         android:textColor="#999999"
         android:textSize="16sp" />
 </LinearLayout>

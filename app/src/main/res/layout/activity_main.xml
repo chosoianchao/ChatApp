@@ -23,6 +23,7 @@
             android:id="@+id/view_bottom"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_100"
+            android:layout_marginBottom="@dimen/dp_20"
             android:background="@color/wild_sand"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
