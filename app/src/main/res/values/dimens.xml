@@ -14,17 +14,6 @@
     <dimen name="dp_70">70dp</dimen>
     <dimen name="dp_100">100dp</dimen>
     <dimen name="dp_120">120dp</dimen>
-
-    <dimen name="sp_14">14sp</dimen>
-    <dimen name="sp_16">16sp</dimen>
-    <dimen name="sp_18">18sp</dimen>
-    <dimen name="sp_20">20sp</dimen>
-    <dimen name="sp_26">26sp</dimen>
-    <dimen name="sp_32">32sp</dimen>
-
-    <dimen name="design_bottom_navigation_height" tools:override="true">@dimen/dp_70</dimen>
-    <dimen name="design_bottom_navigation_text_size">@dimen/sp_20</dimen>
-    <dimen name="design_bottom_navigation_icon_size">@dimen/dp_30</dimen>
     <dimen name="dp_6">6dp</dimen>
     <dimen name="dp_375">375dp</dimen>
     <dimen name="dp_228">228dp</dimen>
@@ -36,6 +25,19 @@
     <dimen name="sp_30">30sp</dimen>
     <dimen name="dp_150">150dp</dimen>
     <dimen name="dp_58">58dp</dimen>
-    <dimen name="dp_58">58dp</dimen>
+    <dimen name="dp_45">45dp</dimen>
+    <dimen name="dp_220">220dp</dimen>
+    <dimen name="sp_12">sp_12</dimen>
+    <dimen name="dp_288">288dp</dimen>
 
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_18">18sp</dimen>
+    <dimen name="sp_20">20sp</dimen>
+    <dimen name="sp_26">26sp</dimen>
+    <dimen name="sp_32">32sp</dimen>
+
+    <dimen name="design_bottom_navigation_height" tools:override="true">@dimen/dp_70</dimen>
+    <dimen name="design_bottom_navigation_text_size">@dimen/sp_20</dimen>
+    <dimen name="design_bottom_navigation_icon_size">@dimen/dp_30</dimen>
 </resources>

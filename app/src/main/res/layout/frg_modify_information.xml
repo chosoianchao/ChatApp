@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.rikkei.tranning.basekotlin.viewmodel.ModifyInformationVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_all_chat">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/iv_back"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_50"
+            android:src="@drawable/ic_back_arrow"
+            app:layout_constraintBottom_toTopOf="@id/view"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/tv_edit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.09"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/edit_information"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tv_save"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/iv_back"
+            app:layout_constraintTop_toTopOf="@+id/iv_back" />
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:gravity="end"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_edit"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_120"
+            android:background="@drawable/bg_corners"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_50"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_avatar"
+            app:layout_constraintBottom_toTopOf="@id/text_name"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/tv_edit"
+            app:layout_constraintStart_toStartOf="@id/tv_edit"
+            app:layout_constraintTop_toTopOf="@id/view" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp_100"
+            android:layout_marginTop="@dimen/dp_120"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_camera"
+            app:layout_constraintBottom_toTopOf="@id/text_name"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/tv_edit"
+            app:layout_constraintStart_toStartOf="@id/tv_edit"
+            app:layout_constraintTop_toTopOf="@id/view"
+            app:layout_constraintWidth_percent="0.15" />
+
+        <TextView
+            android:id="@+id/text_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="@string/text_phone"
+            android:textColor="#999999"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toTopOf="@id/edt_phone"
+            app:layout_constraintEnd_toEndOf="@id/tv_save"
+            app:layout_constraintStart_toStartOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/edt_full_name" />
+
+        <EditText
+            android:id="@+id/edt_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            android:text="@string/text_phone"
+            android:textColor="@color/black"
+            android:textColorHint="#676767"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintEnd_toEndOf="@id/tv_save"
+            app:layout_constraintStart_toStartOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/text_phone"
+            tools:ignore="LabelFor" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_name"
+            app:layout_constraintBottom_toBottomOf="@id/edt_full_name"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/tv_save"
+            app:layout_constraintTop_toTopOf="@id/edt_full_name"
+            app:layout_constraintWidth_percent="0.05" />
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="@string/text_name"
+            android:textColor="#999999"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toTopOf="@id/edt_full_name"
+            app:layout_constraintEnd_toEndOf="@id/tv_save"
+            app:layout_constraintStart_toStartOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/iv_avatar" />
+
+        <EditText
+            android:id="@+id/edt_full_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:text="@string/text_name"
+            android:textColor="@color/black"
+            android:textColorHint="#676767"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toTopOf="@id/text_phone"
+            app:layout_constraintEnd_toEndOf="@id/tv_save"
+            app:layout_constraintStart_toStartOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/text_name"
+            tools:ignore="LabelFor" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_phone"
+            app:layout_constraintBottom_toBottomOf="@id/edt_phone"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/tv_save"
+            app:layout_constraintTop_toTopOf="@id/edt_phone"
+            app:layout_constraintWidth_percent="0.05" />
+
+        <TextView
+            android:id="@+id/text_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="@string/text_date"
+            android:textColor="#999999"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toTopOf="@id/edt_date"
+            app:layout_constraintEnd_toEndOf="@id/tv_save"
+            app:layout_constraintStart_toStartOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/edt_phone" />
+
+        <EditText
+            android:id="@+id/edt_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:hint="@string/text_date"
+            android:importantForAutofill="no"
+            android:inputType="date"
+            android:textColor="@color/black"
+            android:textColorHint="#676767"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintEnd_toEndOf="@id/tv_save"
+            app:layout_constraintStart_toStartOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/text_date"
+            tools:ignore="LabelFor" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_date_of_birth"
+            app:layout_constraintBottom_toBottomOf="@id/edt_date"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/tv_save"
+            app:layout_constraintTop_toTopOf="@id/edt_date"
+            app:layout_constraintWidth_percent="0.05" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.rikkei.tranning.basekotlin.viewmodel.LoginModel" />
+            type="com.rikkei.tranning.basekotlin.viewmodel.LoginVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

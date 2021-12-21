@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.rikkei.tranning.basekotlin.viewmodel.MainChatViewModel" />
+            type="com.rikkei.tranning.basekotlin.viewmodel.MainChatVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

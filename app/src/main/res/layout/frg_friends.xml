@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -9,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.rikkei.tranning.basekotlin.viewmodel.MainChatViewModel" />
+            type="com.rikkei.tranning.basekotlin.viewmodel.FriendsVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +41,7 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/friend" />
+                android:text="@string/text_friend" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -112,6 +110,5 @@
             app:layout_constraintEnd_toEndOf="@id/iv_add_new_friends"
             app:layout_constraintStart_toStartOf="@id/textMessage"
             app:layout_constraintTop_toBottomOf="@id/textMessage" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,6 +5,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainChatViewModel @Inject constructor() : BaseViewModel() {
+class PersonalPageVM @Inject constructor() : BaseViewModel() {
 
+    fun logOutAccount() {
+        auth?.signOut()
+    }
 }

@@ -5,27 +5,27 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.base.BaseFragment
-import com.rikkei.tranning.basekotlin.databinding.FragmentRegisterBinding
+import com.rikkei.tranning.basekotlin.databinding.FrgRegisterBinding
 import com.rikkei.tranning.basekotlin.showToastShort
-import com.rikkei.tranning.basekotlin.viewmodel.RegisterModel
-import com.rikkei.tranning.basekotlin.viewmodel.RegisterModel.Companion.ERROR_EMAIL
-import com.rikkei.tranning.basekotlin.viewmodel.RegisterModel.Companion.ERROR_NAME
-import com.rikkei.tranning.basekotlin.viewmodel.RegisterModel.Companion.ERROR_PASSWORD
-import com.rikkei.tranning.basekotlin.viewmodel.RegisterModel.Companion.INVALID_EMAIL
+import com.rikkei.tranning.basekotlin.viewmodel.RegisterVM
+import com.rikkei.tranning.basekotlin.viewmodel.RegisterVM.Companion.ERROR_EMAIL
+import com.rikkei.tranning.basekotlin.viewmodel.RegisterVM.Companion.ERROR_NAME
+import com.rikkei.tranning.basekotlin.viewmodel.RegisterVM.Companion.ERROR_PASSWORD
+import com.rikkei.tranning.basekotlin.viewmodel.RegisterVM.Companion.INVALID_EMAIL
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
+class RegisterFrg : BaseFragment<FrgRegisterBinding>() {
     override val layoutResource: Int
-        get() = R.layout.fragment_register
+        get() = R.layout.frg_register
 
-    override val viewModel: RegisterModel by viewModels()
+    override val viewModel: RegisterVM by viewModels()
 
 
     override fun initData() {
         with(viewBinding) {
             lifecycleOwner = viewLifecycleOwner
-            viewModel = this@RegisterFragment.viewModel
+            viewModel = this@RegisterFrg.viewModel
         }
     }
 

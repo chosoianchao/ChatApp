@@ -1,15 +1,12 @@
 package com.rikkei.tranning.basekotlin.viewmodel
 
-import androidx.lifecycle.viewModelScope
 import com.rikkei.tranning.basekotlin.base.BaseViewModel
 import com.rikkei.tranning.basekotlin.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ForgotViewModel @Inject constructor() : BaseViewModel() {
+class ForgotVM @Inject constructor() : BaseViewModel() {
 
     private val user: User? = null
     fun validate(email: String): Int {
@@ -25,14 +22,14 @@ class ForgotViewModel @Inject constructor() : BaseViewModel() {
 
     fun forgotPassword(email: String, actionSuccess: () -> Unit, actionFailed: () -> Unit) {
         user?.email = email
-        viewModelScope.launch(Dispatchers.IO) {
-            auth?.sendPasswordResetEmail(email)?.addOnCompleteListener {
-                if (it.isSuccessful) {
-                    actionSuccess()
-                }
-            }?.addOnFailureListener {
-                actionFailed()
+
+        auth?.sendPasswordResetEmail(email)?.addOnCompleteListener {
+            if (it.isSuccessful) {
+                actionSuccess()
             }
+        }?.addOnFailureListener {
+            actionFailed()
+
         }
     }
 

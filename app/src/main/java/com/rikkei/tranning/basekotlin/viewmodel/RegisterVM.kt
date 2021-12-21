@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterModel @Inject constructor() : BaseViewModel() {
+class RegisterVM @Inject constructor() : BaseViewModel() {
     private val user: User? = null
 
     fun validate(name: String, email: String, password: String): Int {

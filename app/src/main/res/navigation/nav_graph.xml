@@ -3,50 +3,90 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/loginFrg">
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.rikkei.tranning.basekotlin.fragment.LoginFragment"
+        android:id="@+id/loginFrg"
+        android:name="com.rikkei.tranning.basekotlin.fragment.LoginFrg"
         android:label="LoginFragment"
-        app:destination="@id/loginFragment"
-        tools:layout="@layout/fragment_login">
+        app:destination="@id/loginFrg"
+        tools:layout="@layout/frg_login">
 
         <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment"
+            android:id="@+id/action_loginFrg_to_registerFrg"
+            app:destination="@id/registerFrg"
             app:enterAnim="@animator/slide_in_right"
             app:exitAnim="@animator/slide_out_left"
             app:popEnterAnim="@animator/slide_in_left"
             app:popExitAnim="@animator/slide_out_right" />
         <action
-            android:id="@+id/action_loginFragment_to_forgotFragment"
-            app:destination="@id/forgotFragment"
+            android:id="@+id/action_loginFrg_to_forgotFrg"
+            app:destination="@id/forgotFrg"
             app:enterAnim="@animator/slide_in_right"
             app:exitAnim="@animator/slide_out_left"
             app:popEnterAnim="@animator/slide_in_left"
             app:popExitAnim="@animator/slide_out_right" />
         <action
-            android:id="@+id/action_loginFragment_to_mainChatFragment"
-            app:destination="@id/mainChatFragment"
+            android:id="@+id/action_loginFrg_to_mainChatFrg"
+            app:destination="@id/mainChatFrg"
             app:enterAnim="@animator/slide_in_right"
             app:exitAnim="@animator/slide_out_left"
             app:popEnterAnim="@animator/slide_in_left"
             app:popExitAnim="@animator/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.rikkei.tranning.basekotlin.fragment.RegisterFragment"
+        android:id="@+id/registerFrg"
+        android:name="com.rikkei.tranning.basekotlin.fragment.RegisterFrg"
         android:label="RegisterFragment"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/frg_register" />
     <fragment
-        android:id="@+id/forgotFragment"
-        android:name="com.rikkei.tranning.basekotlin.fragment.ForgotFragment"
+        android:id="@+id/forgotFrg"
+        android:name="com.rikkei.tranning.basekotlin.fragment.ForgotFrg"
         android:label="ForgotFragment"
-        tools:layout="@layout/fragment_forget_password" />
+        tools:layout="@layout/frg_forget_password" />
     <fragment
-        android:id="@+id/mainChatFragment"
-        android:name="com.rikkei.tranning.basekotlin.fragment.MainChatFragment"
+        android:id="@+id/mainChatFrg"
+        android:name="com.rikkei.tranning.basekotlin.fragment.MainChatFrg"
         android:label="MainChatFragment"
-        tools:layout="@layout/fragment_main_chat" />
+        tools:layout="@layout/frg_main_chat">
+        <action
+            android:id="@+id/action_mainChatFragment_to_friendsFragment"
+            app:destination="@id/friendsFrg" />
+    </fragment>
+    <fragment
+        android:id="@+id/friendsFrg"
+        android:name="com.rikkei.tranning.basekotlin.fragment.FriendsFrg"
+        android:label="FriendsFragment"
+        tools:layout="@layout/frg_friends">
+        <action
+            android:id="@+id/action_friendsFrg_to_personalPageFrg"
+            app:destination="@id/personalPageFrg" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalPageFrg"
+        android:name="com.rikkei.tranning.basekotlin.fragment.PersonalPageFrg"
+        android:label="PersonalPageFragment"
+        tools:layout="@layout/frg_personal_page">
+        <action
+            android:id="@+id/action_personalPageFrg_to_loginFrg"
+            app:destination="@id/loginFrg"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right"
+            app:popUpTo="@id/loginFrg"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_personalPageFrg_to_modifyInformationFrg"
+            app:destination="@id/modifyInformationFrg"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyInformationFrg"
+        android:name="com.rikkei.tranning.basekotlin.fragment.ModifyInformationFrg"
+        android:label="ModifyInformationFrg"
+        tools:layout="@layout/frg_modify_information" />
 </navigation>

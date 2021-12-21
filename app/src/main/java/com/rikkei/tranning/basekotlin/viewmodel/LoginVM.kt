@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class LoginModel @Inject constructor() : BaseViewModel() {
+class LoginVM @Inject constructor() : BaseViewModel() {
     private var user: User? = null
 
     fun validate(email: String, password: String): Int {

@@ -30,8 +30,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             setupWithNavController(navController)
         }
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.mainChatFragment) {
+            if (destination.id == R.id.mainChatFrg) {
                 mBinding?.groupBottomNav?.visibility = View.VISIBLE
+            } else if (destination.id == R.id.loginFrg) {
+                mBinding?.groupBottomNav?.visibility = View.GONE
             }
         }
     }

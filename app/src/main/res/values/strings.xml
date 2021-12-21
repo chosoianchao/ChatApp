@@ -16,7 +16,7 @@
     <string name="text_no_account">No account?</string>
     <string name="text_signup_now">     Signup now</string>
     <string name="text_register">Register</string>
-    <string name="text_name">Full name</string>
+    <string name="text_name">FULL NAME</string>
     <string name="text_your_name_gmail_com">yourname@gmail.com</string>
     <string name="text_agree">I agree to the</string>
     <string name="text_policy">policies</string>
@@ -48,4 +48,10 @@ or Password is needed 6 characters</string>
     <string name="all">All</string>
     <string name="friend">Friend</string>
     <string name="text_message">Message</string>
+    <string name="save">Save</string>
+    <string name="edit_information">Edit information</string>
+    <string name="text_phone">Phone Number</string>
+    <string name="phone">0969584386</string>
+    <string name="text_date">Date of Birth</string>
+    <string name="date_time">10/05/2000</string>
 </resources>
