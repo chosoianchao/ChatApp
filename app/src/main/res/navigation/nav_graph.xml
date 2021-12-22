@@ -56,8 +56,7 @@
     <fragment
         android:id="@+id/friendsFrg"
         android:name="com.rikkei.tranning.basekotlin.fragment.FriendsFrg"
-        android:label="FriendsFragment"
-        tools:layout="@layout/frg_friends">
+        android:label="FriendsFragment">
         <action
             android:id="@+id/action_friendsFrg_to_personalPageFrg"
             app:destination="@id/personalPageFrg" />

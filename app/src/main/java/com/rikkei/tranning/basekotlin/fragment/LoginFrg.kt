@@ -2,6 +2,7 @@ package com.rikkei.tranning.basekotlin.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.base.BaseFragment
@@ -12,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFrg : BaseFragment<FrgLoginBinding>() {
+    var action: NavDirections? = null
 
     override val layoutResource: Int
         get() = R.layout.frg_login
@@ -45,8 +47,8 @@ class LoginFrg : BaseFragment<FrgLoginBinding>() {
     }
 
     private fun accountExists() {
-        val action = LoginFrgDirections.actionLoginFrgToMainChatFrg()
-        findNavController().navigate(action)
+        action = LoginFrgDirections.actionLoginFrgToMainChatFrg()
+        findNavController().navigate(action!!)
     }
 
     private fun onResult(bundle: Bundle) {
@@ -61,19 +63,19 @@ class LoginFrg : BaseFragment<FrgLoginBinding>() {
     }
 
     private fun openRegisterFragment() {
-        val action = LoginFrgDirections.actionLoginFrgToRegisterFrg()
-        findNavController().navigate(action)
+        action = LoginFrgDirections.actionLoginFrgToRegisterFrg()
+        findNavController().navigate(action!!)
     }
 
     private fun openForgotPasswordFragment() {
-        val action = LoginFrgDirections.actionLoginFrgToForgotFrg()
-        findNavController().navigate(action)
+        action = LoginFrgDirections.actionLoginFrgToForgotFrg()
+        findNavController().navigate(action!!)
     }
 
     private fun loginSuccess() {
         context?.showToastShort(getString(R.string.success_login))
-        val action = LoginFrgDirections.actionLoginFrgToMainChatFrg()
-        findNavController().navigate(action)
+        action = LoginFrgDirections.actionLoginFrgToMainChatFrg()
+        findNavController().navigate(action!!)
     }
 
     override fun initData() {

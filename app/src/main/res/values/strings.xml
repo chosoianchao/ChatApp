@@ -54,4 +54,6 @@ or Password is needed 6 characters</string>
     <string name="phone">0969584386</string>
     <string name="text_date">Date of Birth</string>
     <string name="date_time">10/05/2000</string>
+    <string name="text_chat_room">hello, mình là thắng đẹp zai</string>
+    <string name="text_enter_a_message">Enter a message …</string>
 </resources>

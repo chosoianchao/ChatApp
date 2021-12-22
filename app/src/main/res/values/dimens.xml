@@ -9,6 +9,7 @@
     <dimen name="dp_20">20dp</dimen>
     <dimen name="dp_26">26dp</dimen>
     <dimen name="dp_30">30dp</dimen>
+    <dimen name="dp_32">32dp</dimen>
     <dimen name="dp_40">40dp</dimen>
     <dimen name="dp_50">50dp</dimen>
     <dimen name="dp_70">70dp</dimen>
@@ -40,4 +41,7 @@
     <dimen name="design_bottom_navigation_height" tools:override="true">@dimen/dp_70</dimen>
     <dimen name="design_bottom_navigation_text_size">@dimen/sp_20</dimen>
     <dimen name="design_bottom_navigation_icon_size">@dimen/dp_30</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_520">520dp</dimen>
 </resources>

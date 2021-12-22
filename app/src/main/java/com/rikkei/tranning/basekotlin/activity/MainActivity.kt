@@ -34,6 +34,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 mBinding?.groupBottomNav?.visibility = View.VISIBLE
             } else if (destination.id == R.id.loginFrg) {
                 mBinding?.groupBottomNav?.visibility = View.GONE
+            } else if (destination.id == R.id.modifyInformationFrg) {
+                mBinding?.groupBottomNav?.visibility = View.GONE
+            } else if (destination.id == R.id.personalPageFrg) {
+                mBinding?.groupBottomNav?.visibility = View.VISIBLE
             }
         }
     }

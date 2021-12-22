@@ -1,6 +1,7 @@
 package com.rikkei.tranning.basekotlin.fragment
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.base.BaseFragment
 import com.rikkei.tranning.basekotlin.databinding.FrgModifyInformationBinding
@@ -21,5 +22,8 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
     }
 
     override fun initViews() {
+        viewBinding.ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 }
