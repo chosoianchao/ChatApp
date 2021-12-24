@@ -26,7 +26,7 @@ class PersonalPageFrg : BaseFragment<FrgPersonalPageBinding>() {
     }
 
     override fun initViews() {
-        viewModel.readInformation(::information)
+        viewModel.getInformation(::information)
 
         viewBinding.tvLogout.setOnClickListener {
             viewModel.logOutAccount()

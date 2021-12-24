@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.base.BaseFragment
 import com.rikkei.tranning.basekotlin.databinding.FrgRegisterBinding
+import com.rikkei.tranning.basekotlin.showToastLong
 import com.rikkei.tranning.basekotlin.showToastShort
 import com.rikkei.tranning.basekotlin.viewmodel.RegisterVM
 import com.rikkei.tranning.basekotlin.viewmodel.RegisterVM.Companion.ERROR_EMAIL
@@ -44,7 +45,14 @@ class RegisterFrg : BaseFragment<FrgRegisterBinding>() {
             } else if (rs == ERROR_PASSWORD) {
                 context?.showToastShort(getString(R.string.text_password_validate))
             } else {
-                viewModel.register(name, email, password, ::registerSuccess, ::registerFailed)
+                viewModel.register(
+                    name,
+                    email,
+                    password,
+                    ::registerSuccess,
+                    ::registerFailed,
+                    ::emailSent
+                )
             }
         }
 
@@ -54,6 +62,10 @@ class RegisterFrg : BaseFragment<FrgRegisterBinding>() {
         viewBinding.imageBack.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    private fun emailSent() {
+        context?.showToastLong(getString(R.string.text_verify_email))
     }
 
     private fun registerSuccess() {

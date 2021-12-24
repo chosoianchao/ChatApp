@@ -1,11 +1,8 @@
 package com.rikkei.tranning.basekotlin.viewmodel
 
-import androidx.lifecycle.viewModelScope
 import com.rikkei.tranning.basekotlin.base.BaseViewModel
 import com.rikkei.tranning.basekotlin.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,6 +32,7 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         password: String,
         actionSuccess: () -> Unit,
         actionFailed: () -> Unit,
+        emailSent: () -> Unit,
     ) {
         user?.name = name
         user?.email = email
@@ -43,9 +41,12 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         auth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener {
             if (it.isSuccessful) {
                 actionSuccess()
-                viewModelScope.launch(Dispatchers.IO) {
-                    insertData(name, email)
+                mUser?.sendEmailVerification()?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        emailSent()
+                    }
                 }
+                insertData(name, email)
             }
         }?.addOnFailureListener {
             actionFailed()
@@ -53,11 +54,15 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
     }
 
     private fun insertData(name: String, email: String) {
-        val mRef = mUser?.uid?.let {
-            databaseReference?.database?.reference?.child(USERS)?.child(it)
-        }
+        val mRef =
+            mUser?.uid.let { uid ->
+                uid?.let { databaseReference?.database?.reference?.child(USERS)?.child(it) }
+            }
         mRef?.child(NAME)?.setValue(name)
         mRef?.child(EMAIL)?.setValue(email)
+        mRef?.child(PHONE)?.setValue("")
+        mRef?.child(DATE)?.setValue("")
+        mRef?.child(PHOTO)?.setValue("")
     }
 
     companion object {
@@ -67,7 +72,10 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         const val ERROR_EMAIL: Int = 404
         const val SUCCESS: Int = 201
         private const val USERS: String = "Users"
-        private const val EMAIL: String = "Email"
         private const val NAME: String = "Name"
+        private const val EMAIL: String = "Email"
+        private const val DATE: String = "Date of birth"
+        private const val PHONE: String = "Phone"
+        private const val PHOTO: String = "PhotoUrl"
     }
 }

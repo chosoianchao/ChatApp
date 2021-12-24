@@ -56,4 +56,5 @@ or Password is needed 6 characters</string>
     <string name="date_time">10/05/2000</string>
     <string name="text_chat_room">hello, mình là thắng đẹp zai</string>
     <string name="text_enter_a_message">Enter a message …</string>
+    <string name="text_verify_email">Please check your email to verify</string>
 </resources>

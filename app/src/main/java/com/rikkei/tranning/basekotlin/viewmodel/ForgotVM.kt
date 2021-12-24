@@ -20,16 +20,16 @@ class ForgotVM @Inject constructor() : BaseViewModel() {
         }
     }
 
-    fun forgotPassword(email: String, actionSuccess: () -> Unit, actionFailed: () -> Unit) {
+    fun forgotPassword(email: String, actionSuccess: () -> Unit, emailInvalid: () -> Unit) {
         user?.email = email
-
-        auth?.sendPasswordResetEmail(email)?.addOnCompleteListener {
-            if (it.isSuccessful) {
-                actionSuccess()
+        if (mUser?.isEmailVerified == true) {
+            auth?.sendPasswordResetEmail(email)?.addOnCompleteListener {
+                if (it.isSuccessful) {
+                    actionSuccess()
+                }
             }
-        }?.addOnFailureListener {
-            actionFailed()
-
+        } else {
+            emailInvalid()
         }
     }
 

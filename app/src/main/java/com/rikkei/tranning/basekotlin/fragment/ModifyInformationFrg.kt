@@ -1,5 +1,6 @@
 package com.rikkei.tranning.basekotlin.fragment
 
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.rikkei.tranning.basekotlin.R
@@ -22,8 +23,27 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
     }
 
     override fun initViews() {
+        viewModel.getInformation(::getInformation)
         viewBinding.ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
+        viewBinding.tvSave.setOnClickListener {
+            it.startAnimation(
+                AnimationUtils.loadAnimation(
+                    context,
+                    androidx.appcompat.R.anim.abc_popup_enter
+                )
+            )
+            val name = viewBinding.edtFullName.text.toString()
+            val phone = viewBinding.edtPhone.text.toString()
+            val date = viewBinding.edtDate.text.toString()
+            viewModel.updateProfile(name, phone, date)
+        }
+    }
+
+    private fun getInformation(name: Any?, phone: Any?, date: Any?) {
+        viewBinding.edtFullName.setText(name.toString())
+        viewBinding.edtPhone.setText(phone.toString())
+        viewBinding.edtDate.setText(date.toString())
     }
 }
