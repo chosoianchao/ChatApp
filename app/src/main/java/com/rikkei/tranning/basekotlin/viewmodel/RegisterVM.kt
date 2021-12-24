@@ -1,8 +1,11 @@
 package com.rikkei.tranning.basekotlin.viewmodel
 
+import androidx.lifecycle.viewModelScope
 import com.rikkei.tranning.basekotlin.base.BaseViewModel
 import com.rikkei.tranning.basekotlin.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,16 +43,19 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         auth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener {
             if (it.isSuccessful) {
                 actionSuccess()
-                updateData(name, email)
+                viewModelScope.launch(Dispatchers.IO) {
+                    insertData(name, email)
+                }
             }
         }?.addOnFailureListener {
             actionFailed()
         }
     }
 
-    private fun updateData(name: String, email: String) {
-        val mRef =
-            mUser?.uid?.let { databaseReference?.database?.reference?.child(USERS)?.child(it) }
+    private fun insertData(name: String, email: String) {
+        val mRef = mUser?.uid?.let {
+            databaseReference?.database?.reference?.child(USERS)?.child(it)
+        }
         mRef?.child(NAME)?.setValue(name)
         mRef?.child(EMAIL)?.setValue(email)
     }
@@ -60,8 +66,8 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         const val ERROR_NAME: Int = 403
         const val ERROR_EMAIL: Int = 404
         const val SUCCESS: Int = 201
-        const val USERS: String = "Users"
-        const val EMAIL: String = "Email"
-        const val NAME: String = "Name"
+        private const val USERS: String = "Users"
+        private const val EMAIL: String = "Email"
+        private const val NAME: String = "Name"
     }
 }
