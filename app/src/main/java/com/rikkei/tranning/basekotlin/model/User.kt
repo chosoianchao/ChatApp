@@ -1,8 +1,9 @@
 package com.rikkei.tranning.basekotlin.model
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 data class User(
     var uid: String? = null,
     var email: String,
@@ -10,4 +11,4 @@ data class User(
     var name: String = "",
     var dob: String = "",
     var avatar: String = "",
-) : Serializable
+) : Parcelable

@@ -69,10 +69,6 @@
         <action
             android:id="@+id/action_personalPageFrg_to_loginFrg"
             app:destination="@id/loginFrg"
-            app:enterAnim="@animator/slide_in_right"
-            app:exitAnim="@animator/slide_out_left"
-            app:popEnterAnim="@animator/slide_in_left"
-            app:popExitAnim="@animator/slide_out_right"
             app:popUpTo="@id/loginFrg"
             app:popUpToInclusive="true" />
         <action

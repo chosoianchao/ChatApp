@@ -26,6 +26,8 @@ class PersonalPageFrg : BaseFragment<FrgPersonalPageBinding>() {
     }
 
     override fun initViews() {
+        viewModel.readInformation(::information)
+
         viewBinding.tvLogout.setOnClickListener {
             viewModel.logOutAccount()
             action = PersonalPageFrgDirections.actionPersonalPageFrgToLoginFrg()
@@ -34,6 +36,16 @@ class PersonalPageFrg : BaseFragment<FrgPersonalPageBinding>() {
         viewBinding.ivPencil.setOnClickListener {
             action = PersonalPageFrgDirections.actionPersonalPageFrgToModifyInformationFrg()
             findNavController().navigate(action!!)
+        }
+    }
+
+    private fun information(email: Any?, name: Any?) {
+        if (email == null || name == null) {
+            viewBinding.tvEmail.text = ""
+            viewBinding.tvName.text = ""
+        } else {
+            viewBinding.tvEmail.text = email.toString()
+            viewBinding.tvName.text = name.toString()
         }
     }
 }
