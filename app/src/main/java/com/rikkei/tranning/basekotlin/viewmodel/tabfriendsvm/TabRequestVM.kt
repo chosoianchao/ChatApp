@@ -1,6 +1,5 @@
 package com.rikkei.tranning.basekotlin.viewmodel.tabfriendsvm
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -14,29 +13,24 @@ import javax.inject.Inject
 @HiltViewModel
 class TabRequestVM @Inject constructor() : BaseViewModel() {
 
-    private var user: User? = null
+    private lateinit var currentState: String
 
-    var liveUser: MutableLiveData<List<User>> =
-        MutableLiveData<List<User>>(ArrayList())
+    val liveListRequest: MutableLiveData<List<User>> by lazy { MutableLiveData<List<User>>(ArrayList()) }
 
     fun getData() {
-        val myTopPostsQuery = root?.child(USERS)
-        myTopPostsQuery?.addValueEventListener(object : ValueEventListener {
+        val getListRequest = root?.child(USERS)
+        getListRequest?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val listUser = ArrayList<User>()
                     for (postSnapshot in snapshot.children) {
-                        if (postSnapshot.child(EMAIL).value.toString() != mUser?.email) {
-                            user = postSnapshot.getValue<User>()
+                        if (postSnapshot.child(EMAIL).value != mUser?.email) {
+                            val user: User? = postSnapshot.getValue<User>()!!
                             user?.let { listUser.add(it) }
-                            CURRENT_STATE = "not_friends"
-                            Log.d(
-                                "Thang",
-                                "onDataChange() called with: liveUser = ${liveUser.value}  + \n$user"
-                            )
+                            currentState = NOT_FRIENDS
                         }
                     }
-                    liveUser.postValue(listUser)
+                    liveListRequest.postValue(listUser)
                 }
             }
 
@@ -46,37 +40,39 @@ class TabRequestVM @Inject constructor() : BaseViewModel() {
         })
     }
 
-    fun addFriends() {
-        Log.d("Thang", "addFriends() called ${user?.Id}")
-        if (CURRENT_STATE == "not_friends") {
+    fun addFriends(data: Any?) {
+        val user: User = data as User
+        if (currentState == NOT_FRIENDS) {
             mUser?.uid?.let { send ->
-                user?.Id?.let { receive ->
-                    root?.database?.reference?.child(USERS)?.child(send)?.child("Friends")
+                user.Id.let { receive ->
+                    root?.database?.reference?.child(FRIENDS)
                         ?.child(send)
-                        ?.child(receive)?.child("request_type")?.setValue("sent")
+                        ?.child(receive)?.child(REQUEST_TYPE)?.setValue(SENT)
                         ?.addOnCompleteListener {
                             if (it.isSuccessful) {
-                                root!!.database.reference.child(USERS).child(send)
-                                    .child("Friends")
+                                root!!.database.reference
+                                    .child(FRIENDS)
                                     .child(receive)
                                     .child(send)
-                                    .child("request_type")
-                                    .setValue("received").addOnSuccessListener {
-                                        CURRENT_STATE = "req_sent"
-                                        Log.d("Thang", "addFriends() called : Success")
+                                    .child(REQUEST_TYPE)
+                                    .setValue(RECEIVED).addOnSuccessListener {
+                                        currentState = REQUEST_SENT
                                     }
                             }
                         }
                 }
             }
-        } else {
-            Log.d("Thang", "addFriends() called: Failed Sending Request")
         }
     }
 
     companion object {
         private const val USERS: String = "Users"
         private const val EMAIL: String = "Email"
-        private var CURRENT_STATE: String = ""
+        private const val NOT_FRIENDS: String = "not_friends"
+        private const val REQUEST_SENT: String = "req_sent"
+        private const val REQUEST_TYPE: String = "request_type"
+        private const val FRIENDS: String = "Friends"
+        private const val RECEIVED: String = "received"
+        private const val SENT: String = "sent"
     }
 }
