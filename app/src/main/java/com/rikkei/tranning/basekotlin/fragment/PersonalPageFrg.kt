@@ -47,8 +47,8 @@ class PersonalPageFrg : BaseFragment<FrgPersonalPageBinding>() {
         viewBinding.loadingPage.visibility = View.GONE
         when (photo) {
             "" -> {
-                viewBinding.ivAvatar.setImageResource(R.drawable.ic_avatar)
-                viewBinding.ivViewPersonal.setImageResource(R.drawable.ic_avatar)
+                viewBinding.ivAvatar.setImageResource(R.drawable.ic_user)
+                viewBinding.ivViewPersonal.setImageResource(R.drawable.ic_personal_page)
                 viewBinding.tvEmail.text = email.toString()
                 viewBinding.tvName.text = name.toString()
             }

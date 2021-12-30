@@ -7,7 +7,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @IgnoreExtraProperties
 data class User(
-    var Friends: String = "",
     var Date: String? = "",
     var Email: String = "",
     var Id: String = "",
@@ -49,9 +48,12 @@ data class User(
     }
 
 
+    override fun toString(): String {
+        return "User(Date=$Date, Email='$Email', Id='$Id', Name='$Name', Password='$Password', Phone='$Phone', PhotoUrl='$PhotoUrl')"
+    }
+
     override fun hashCode(): Int {
-        var result = Friends.hashCode()
-        result = 31 * result + (Date?.hashCode() ?: 0)
+        var result = Date?.hashCode() ?: 0
         result = 31 * result + Email.hashCode()
         result = 31 * result + Id.hashCode()
         result = 31 * result + Name.hashCode()
@@ -59,9 +61,5 @@ data class User(
         result = 31 * result + Phone.hashCode()
         result = 31 * result + PhotoUrl.hashCode()
         return result
-    }
-
-    override fun toString(): String {
-        return "User(Friends='$Friends', Date=$Date, Email='$Email', Id='$Id', Name='$Name', Password='$Password', Phone='$Phone', PhotoUrl='$PhotoUrl')"
     }
 }

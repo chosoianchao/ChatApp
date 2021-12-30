@@ -78,7 +78,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/dp_50"
             android:contentDescription="@null"
-            android:src="@drawable/ic_avatar"
+            android:src="@drawable/ic_user"
             app:layout_constraintBottom_toTopOf="@id/text_name"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="@id/tv_edit"

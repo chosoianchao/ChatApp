@@ -63,5 +63,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_send_request"
             tools:listitem="@layout/item_all_friends" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

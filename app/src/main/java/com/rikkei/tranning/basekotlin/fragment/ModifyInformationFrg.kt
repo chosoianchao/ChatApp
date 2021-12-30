@@ -120,17 +120,21 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setTitle(ADD_PHOTO)
         builder.setItems(options) { dialog, item ->
-            if (options[item] == TAKE_PHOTO) {
-                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                activity?.packageManager.let {
-                    if (intent.resolveActivity(it!!) != null) {
-                        getImageFromCamera?.launch(intent)
+            when {
+                options[item] == TAKE_PHOTO -> {
+                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    activity?.packageManager.let {
+                        if (intent.resolveActivity(it!!) != null) {
+                            getImageFromCamera?.launch(intent)
+                        }
                     }
                 }
-            } else if (options[item] == IMAGE_FROM_GALLERY) {
-                getImageFromGallery.launch(IMAGE)
-            } else if (options[item] == CANCEL) {
-                dialog.dismiss()
+                options[item] == IMAGE_FROM_GALLERY -> {
+                    getImageFromGallery.launch(IMAGE)
+                }
+                options[item] == CANCEL -> {
+                    dialog.dismiss()
+                }
             }
         }
         builder.show()
@@ -149,7 +153,7 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
                 viewBinding.edtFullName.setText(name.toString())
                 viewBinding.edtPhone.setText(phone.toString())
                 viewBinding.edtDate.setText(date.toString())
-                viewBinding.ivAvatar.setImageResource(R.drawable.ic_avatar)
+                viewBinding.ivAvatar.setImageResource(R.drawable.ic_user)
             }
             else -> {
                 viewBinding.edtFullName.setText(name.toString())

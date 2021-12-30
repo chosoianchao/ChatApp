@@ -1,11 +1,10 @@
 package com.rikkei.tranning.basekotlin.fragment.tabfriendsfrg
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rikkei.tranning.basekotlin.OnActionCallBack
 import com.rikkei.tranning.basekotlin.R
-import com.rikkei.tranning.basekotlin.adapter.ActionCallBack
 import com.rikkei.tranning.basekotlin.adapter.RequestAdapter
 import com.rikkei.tranning.basekotlin.base.BaseFragment
 import com.rikkei.tranning.basekotlin.databinding.FrgTabRequestBinding
@@ -27,9 +26,9 @@ class TabRequestFrg : BaseFragment<FrgTabRequestBinding>() {
 
     override fun initViews() {
         showListRequest()
-        viewModel.liveUser.observe(this, {
-            val request: RequestAdapter = viewBinding.rvListRequest.adapter as RequestAdapter
-            request.updateEmployeeListItems(it)
+        viewModel.liveListRequest.observe(this, {
+            val userAdapter: RequestAdapter = viewBinding.rvListRequest.adapter as RequestAdapter
+            userAdapter.updateUserListItems(it)
         })
     }
 
@@ -40,13 +39,12 @@ class TabRequestFrg : BaseFragment<FrgTabRequestBinding>() {
         val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         viewBinding.rvListRequest.addItemDecoration(decoration)
 
-        if (viewModel.liveUser.value != null) {
-            val userAdapter = RequestAdapter(context, viewModel.liveUser.value!!,
-                object : ActionCallBack {
+        if (viewModel.liveListRequest.value != null) {
+            val userAdapter = RequestAdapter(context, viewModel.liveListRequest.value!!,
+                object : OnActionCallBack {
                     override fun callBack(data: Any?, key: String) {
-                        if (key == "aaa") {
-                            Log.d("Thang", "callBack() called with: data = $data, key = $key")
-                            viewModel.addFriends()
+                        if (key == RequestAdapter.ADD_FRIENDS) {
+                            viewModel.addFriends(data)
                         }
                     }
                 })
