@@ -49,8 +49,8 @@ class TabRequestVM @Inject constructor() : BaseViewModel() {
     fun addFriends() {
         Log.d("Thang", "addFriends() called ${user?.Id}")
         if (CURRENT_STATE == "not_friends") {
-            mUser?.email?.let { send ->
-                user?.Email?.let { receive ->
+            mUser?.uid?.let { send ->
+                user?.Id?.let { receive ->
                     root?.database?.reference?.child(USERS)?.child(send)?.child("Friends")
                         ?.child(send)
                         ?.child(receive)?.child("request_type")?.setValue("sent")
@@ -70,7 +70,6 @@ class TabRequestVM @Inject constructor() : BaseViewModel() {
                 }
             }
         } else {
-
             Log.d("Thang", "addFriends() called: Failed Sending Request")
         }
     }

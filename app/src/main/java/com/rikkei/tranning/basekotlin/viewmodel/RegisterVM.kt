@@ -60,7 +60,6 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         ref?.child(EMAIL)?.setValue(email)
         ref?.child(PHONE)?.setValue("")
         ref?.child(DATE)?.setValue("")
-        mUser?.email?.let { ref?.child(FRIENDS)?.child(it)?.setValue("") }
         ref?.child(PHOTO)?.setValue("")
         ref?.child(PASSWORD)?.setValue("")
     }
@@ -79,6 +78,5 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         private const val PHONE: String = "Phone"
         private const val PHOTO: String = "PhotoUrl"
         private const val PASSWORD: String = "Password"
-        private const val FRIENDS: String = "Password"
     }
 }
