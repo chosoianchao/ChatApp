@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.rikkei.tranning.basekotlin.viewmodel.tabfriendsvm.TabRequestVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EFEEEE">
+
+        <TextView
+            android:id="@+id/tv_friend_request"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/friend_request"
+            android:textColor="#999999"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toTopOf="@id/rv_list_request"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_request"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            app:layout_constraintBottom_toTopOf="@id/tv_send_request"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_friend_request"
+            tools:listitem="@layout/item_all_friends" />
+
+        <TextView
+            android:id="@+id/tv_send_request"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/to_send_friends"
+            android:textColor="#999999"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toTopOf="@id/rv_list_requested"
+            app:layout_constraintEnd_toEndOf="@id/tv_friend_request"
+            app:layout_constraintStart_toStartOf="@id/tv_friend_request"
+            app:layout_constraintTop_toBottomOf="@id/rv_list_request" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_requested"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_send_request"
+            tools:listitem="@layout/item_all_friends" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

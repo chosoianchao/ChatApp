@@ -57,4 +57,10 @@ or Password is needed 6 characters</string>
     <string name="text_chat_room">hello, mình là thắng đẹp zai</string>
     <string name="text_enter_a_message">Enter a message …</string>
     <string name="text_verify_email">Please check your email to verify</string>
+    <string name="success">Success</string>
+    <string name="permission_denied">Access denied
+ You need access</string>
+    <string name="add_friend">Add friend</string>
+    <string name="to_send_friends">TO SEND FRIENDS</string>
+    <string name="friend_request">FRIEND REQUEST</string>
 </resources>

@@ -9,16 +9,20 @@ import javax.inject.Inject
 class PersonalPageVM @Inject constructor() : BaseViewModel() {
     private val user: User? = null
 
-    fun getInformation(action: (mEmail: Any?, mMame: Any?) -> Unit) {
+    fun getInformation(
+        loadingSuccess: (mEmail: Any?, mMame: Any?, mPhoto: Any?) -> Unit,
+    ) {
         mUser?.uid?.let {
-            databaseReference?.database?.reference?.child(USERS)?.child(it)?.get()
+            root?.database?.reference?.child(USERS)?.child(it)?.get()
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val email = task.result.child(EMAIL).value
                         val name = task.result.child(NAME).value
-                        user?.email = email.toString()
-                        user?.name = name.toString()
-                        action(email, name)
+                        val photo = task.result.child(PHOTO).value
+                        user?.Email = email.toString()
+                        user?.Name = name.toString()
+                        user?.PhotoUrl = photo.toString()
+                        loadingSuccess(email, name, photo)
                     }
                 }
         }
@@ -32,5 +36,6 @@ class PersonalPageVM @Inject constructor() : BaseViewModel() {
         private const val EMAIL: String = "Email"
         private const val NAME: String = "Name"
         private const val USERS: String = "Users"
+        private const val PHOTO: String = "PhotoUrl"
     }
 }

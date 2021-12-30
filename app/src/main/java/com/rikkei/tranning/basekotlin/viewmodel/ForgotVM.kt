@@ -10,7 +10,7 @@ class ForgotVM @Inject constructor() : BaseViewModel() {
 
     private val user: User? = null
     fun validate(email: String): Int {
-        user?.email = email
+        user?.Email = email
         if (email.isEmpty()) {
             return ERROR_EMAIL
         } else if (!isEmailInvalid(email)) {
@@ -21,7 +21,7 @@ class ForgotVM @Inject constructor() : BaseViewModel() {
     }
 
     fun forgotPassword(email: String, actionSuccess: () -> Unit, emailInvalid: () -> Unit) {
-        user?.email = email
+        user?.Email = email
         if (mUser?.isEmailVerified == true) {
             auth?.sendPasswordResetEmail(email)?.addOnCompleteListener {
                 if (it.isSuccessful) {

@@ -1,8 +1,10 @@
 package com.rikkei.tranning.basekotlin.fragment
 
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.base.BaseFragment
 import com.rikkei.tranning.basekotlin.databinding.FrgPersonalPageBinding
@@ -12,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PersonalPageFrg : BaseFragment<FrgPersonalPageBinding>() {
     private var action: NavDirections? = null
+
 
     override val layoutResource: Int
         get() = R.layout.frg_personal_page
@@ -26,7 +29,8 @@ class PersonalPageFrg : BaseFragment<FrgPersonalPageBinding>() {
     }
 
     override fun initViews() {
-        viewModel.getInformation(::information)
+
+        viewModel.getInformation(::loadingInformation)
 
         viewBinding.tvLogout.setOnClickListener {
             viewModel.logOutAccount()
@@ -39,13 +43,21 @@ class PersonalPageFrg : BaseFragment<FrgPersonalPageBinding>() {
         }
     }
 
-    private fun information(email: Any?, name: Any?) {
-        if (email == null || name == null) {
-            viewBinding.tvEmail.text = ""
-            viewBinding.tvName.text = ""
-        } else {
-            viewBinding.tvEmail.text = email.toString()
-            viewBinding.tvName.text = name.toString()
+    private fun loadingInformation(email: Any?, name: Any?, photo: Any?) {
+        viewBinding.loadingPage.visibility = View.GONE
+        when (photo) {
+            "" -> {
+                viewBinding.ivAvatar.setImageResource(R.drawable.ic_avatar)
+                viewBinding.ivViewPersonal.setImageResource(R.drawable.ic_avatar)
+                viewBinding.tvEmail.text = email.toString()
+                viewBinding.tvName.text = name.toString()
+            }
+            else -> {
+                viewBinding.tvEmail.text = email.toString()
+                viewBinding.tvName.text = name.toString()
+                context?.let { Glide.with(it).load(photo).into(viewBinding.ivViewPersonal) }
+                context?.let { Glide.with(it).load(photo).into(viewBinding.ivAvatar) }
+            }
         }
     }
 }

@@ -10,19 +10,19 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
     private val user: User? = null
 
     fun validate(name: String, email: String, password: String): Int {
-        user?.name = name
-        user?.email = email
-        user?.password = password
-        if (name.isEmpty()) {
-            return ERROR_NAME
+        user?.Name = name
+        user?.Email = email
+        user?.Password = password
+        return if (name.isEmpty()) {
+            ERROR_NAME
         } else if (email.isEmpty()) {
-            return ERROR_EMAIL
+            ERROR_EMAIL
         } else if (!isEmailInvalid(email)) {
-            return INVALID_EMAIL
+            INVALID_EMAIL
         } else if (password.isEmpty() || password.length <= 5) {
-            return ERROR_PASSWORD
+            ERROR_PASSWORD
         } else {
-            return SUCCESS
+            SUCCESS
         }
     }
 
@@ -34,9 +34,9 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         actionFailed: () -> Unit,
         emailSent: () -> Unit,
     ) {
-        user?.name = name
-        user?.email = email
-        user?.password = password
+        user?.Name = name
+        user?.Email = email
+        user?.Password = password
 
         auth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener {
             if (it.isSuccessful) {
@@ -54,15 +54,15 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
     }
 
     private fun insertData(name: String, email: String) {
-        val mRef =
-            mUser?.uid.let { uid ->
-                uid?.let { databaseReference?.database?.reference?.child(USERS)?.child(it) }
-            }
-        mRef?.child(NAME)?.setValue(name)
-        mRef?.child(EMAIL)?.setValue(email)
-        mRef?.child(PHONE)?.setValue("")
-        mRef?.child(DATE)?.setValue("")
-        mRef?.child(PHOTO)?.setValue("")
+        val ref = mUser?.uid?.let { root?.database?.reference?.child(USERS)?.child(it) }
+        ref?.child(ID)?.setValue(mUser?.uid)
+        ref?.child(NAME)?.setValue(name)
+        ref?.child(EMAIL)?.setValue(email)
+        ref?.child(PHONE)?.setValue("")
+        ref?.child(DATE)?.setValue("")
+        mUser?.email?.let { ref?.child(FRIENDS)?.child(it)?.setValue("") }
+        ref?.child(PHOTO)?.setValue("")
+        ref?.child(PASSWORD)?.setValue("")
     }
 
     companion object {
@@ -72,10 +72,13 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         const val ERROR_EMAIL: Int = 404
         const val SUCCESS: Int = 201
         private const val USERS: String = "Users"
+        private const val ID: String = "Id"
         private const val NAME: String = "Name"
         private const val EMAIL: String = "Email"
-        private const val DATE: String = "Date of birth"
+        private const val DATE: String = "Date"
         private const val PHONE: String = "Phone"
         private const val PHOTO: String = "PhotoUrl"
+        private const val PASSWORD: String = "Password"
+        private const val FRIENDS: String = "Password"
     }
 }

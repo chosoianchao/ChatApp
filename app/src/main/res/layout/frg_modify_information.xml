@@ -32,17 +32,16 @@
 
         <TextView
             android:id="@+id/tv_edit"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="90dp"
             android:gravity="center"
             android:text="@string/edit_information"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_18"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintEnd_toStartOf="@id/tv_save"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/iv_back"
             app:layout_constraintTop_toTopOf="@+id/iv_back" />
 
@@ -50,13 +49,14 @@
             android:id="@+id/tv_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_30"
             android:layout_marginEnd="@dimen/dp_20"
             android:gravity="end"
             android:text="@string/save"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_edit"
             app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -72,7 +72,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_avatar"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -85,7 +85,9 @@
             app:layout_constraintStart_toStartOf="@id/tv_edit"
             app:layout_constraintTop_toTopOf="@id/view" />
 
+
         <ImageView
+            android:id="@+id/iv_select_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/dp_100"
@@ -204,14 +206,14 @@
             android:layout_marginTop="@dimen/dp_8"
             android:hint="@string/text_date"
             android:importantForAutofill="no"
-            android:inputType="date"
+            android:inputType="text"
             android:textColor="@color/black"
             android:textColorHint="#676767"
             android:textSize="@dimen/sp_16"
             app:layout_constraintEnd_toEndOf="@id/tv_save"
             app:layout_constraintStart_toStartOf="@id/iv_back"
             app:layout_constraintTop_toBottomOf="@id/text_date"
-            tools:ignore="LabelFor" />
+            tools:ignore="TextFields" />
 
         <ImageView
             android:layout_width="0dp"
@@ -226,5 +228,20 @@
             app:layout_constraintTop_toTopOf="@id/edt_date"
             app:layout_constraintWidth_percent="0.05" />
 
+        <ProgressBar
+            android:id="@+id/loadingInformation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fromDegrees="0"
+            android:indeterminate="true"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:toDegrees="360"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

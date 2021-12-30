@@ -11,8 +11,8 @@ class LoginVM @Inject constructor() : BaseViewModel() {
     private var user: User? = null
 
     fun validate(email: String, password: String): Int {
-        user?.email = email
-        user?.password = password
+        user?.Email = email
+        user?.Password = password
         if (email.isEmpty()) {
             return ERROR_EMAIL
         } else if (!isEmailInvalid(email)) {
@@ -30,8 +30,8 @@ class LoginVM @Inject constructor() : BaseViewModel() {
         actionSuccess: () -> Unit,
         actionFailed: () -> Unit
     ) {
-        user?.email = email
-        user?.password = password
+        user?.Email = email
+        user?.Password = password
 
         auth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
