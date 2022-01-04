@@ -46,30 +46,36 @@ class MainChatVM @Inject constructor() : BaseViewModel() {
         val getList = mUser?.uid?.let { root?.database?.reference?.child("Friends")?.child(it) }
         getList?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (postSnapshot in snapshot.children) {
-                    val friends: Friends? = postSnapshot.getValue<Friends>()
-                    for (id in friendsChat) {
-                        if (friends?.Id.equals(id)) {
-                            if (listFriends.size != 0) {
-                                for (friends1 in listFriends) {
-                                    if (!friends?.Id.equals(friends1.Id)) {
-                                        friends?.let { listFriends.add(it) }
-                                    }
-                                }
-                            } else {
-                                friends?.let { listFriends.add(it) }
-                            }
-                            liveListFriends.postValue(listFriends)
-                        }
-                    }
-                    Log.d("Thang", "listFriends: $friends")
-                    Log.d("Thang", "chat: $friendsChat")
-                }
+                handleReadChat(snapshot)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 throw  error.toException()
             }
         })
+    }
+
+    private fun handleReadChat(snapshot: DataSnapshot){
+        for (postSnapshot in snapshot.children) {
+            val friends: Friends? = postSnapshot.getValue<Friends>()
+            for (id in friendsChat) {
+                if (friends?.Id.equals(id)) {
+                    if (listFriends.size != 0) {
+                        val listFriendsAdded = ArrayList<Friends>()
+                        for (friends1 in listFriends) {
+                            if (!friends?.Id.equals(friends1.Id)) {
+                                friends?.let { listFriendsAdded.add(it) }
+                            }
+                        }
+                        listFriends.addAll(listFriendsAdded)
+                    } else {
+                        friends?.let { listFriends.add(it) }
+                    }
+                    liveListFriends.postValue(listFriends)
+                }
+            }
+            Log.d("Thang", "listFriends: $friends")
+            Log.d("Thang", "chat: $friendsChat")
+        }
     }
 }
