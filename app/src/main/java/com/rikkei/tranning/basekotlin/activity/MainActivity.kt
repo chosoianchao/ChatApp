@@ -30,14 +30,31 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             setupWithNavController(navController)
         }
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.mainChatFrg) {
-                mBinding?.groupBottomNav?.visibility = View.VISIBLE
-            } else if (destination.id == R.id.loginFrg) {
-                mBinding?.groupBottomNav?.visibility = View.GONE
-            } else if (destination.id == R.id.modifyInformationFrg) {
-                mBinding?.groupBottomNav?.visibility = View.GONE
-            } else if (destination.id == R.id.personalPageFrg) {
-                mBinding?.groupBottomNav?.visibility = View.VISIBLE
+            when (destination.id) {
+                R.id.mainChatFrg -> {
+                    mBinding?.groupBottomNav?.visibility = View.VISIBLE
+                }
+                R.id.loginFrg -> {
+                    mBinding?.groupBottomNav?.visibility = View.GONE
+                }
+                R.id.modifyInformationFrg -> {
+                    mBinding?.groupBottomNav?.visibility = View.GONE
+                }
+                R.id.personalPageFrg -> {
+                    mBinding?.groupBottomNav?.visibility = View.VISIBLE
+                }
+                R.id.tabRequestFrg -> {
+                    mBinding?.groupBottomNav?.visibility = View.GONE
+                }
+                R.id.friendsFrg -> {
+                    mBinding?.groupBottomNav?.visibility = View.VISIBLE
+                }
+                R.id.createMessageWithFriendsFrg -> {
+                    mBinding?.groupBottomNav?.visibility = View.GONE
+                }
+                R.id.chatRoomFrg -> {
+                    mBinding?.groupBottomNav?.visibility = View.GONE
+                }
             }
         }
     }

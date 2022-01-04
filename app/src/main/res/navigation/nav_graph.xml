@@ -52,14 +52,36 @@
         <action
             android:id="@+id/action_mainChatFragment_to_friendsFragment"
             app:destination="@id/friendsFrg" />
+        <action
+            android:id="@+id/action_mainChatFrg_to_createMessageWithFriendsFrg"
+            app:destination="@id/createMessageWithFriendsFrg"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right" />
+        <action
+            android:id="@+id/action_mainChatFrg_to_chatRoomFrg"
+            app:destination="@id/chatRoomFrg"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/friendsFrg"
         android:name="com.rikkei.tranning.basekotlin.fragment.FriendsFrg"
-        android:label="FriendsFragment">
+        android:label="FriendsFragment"
+        tools:layout="@layout/frg_friends">
         <action
             android:id="@+id/action_friendsFrg_to_personalPageFrg"
             app:destination="@id/personalPageFrg" />
+        <action
+            android:id="@+id/action_friendsFrg_to_tabRequestFrg"
+            app:destination="@id/tabRequestFrg"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/personalPageFrg"
@@ -84,4 +106,33 @@
         android:name="com.rikkei.tranning.basekotlin.fragment.ModifyInformationFrg"
         android:label="ModifyInformationFrg"
         tools:layout="@layout/frg_modify_information" />
+    <fragment
+        android:id="@+id/tabRequestFrg"
+        android:name="com.rikkei.tranning.basekotlin.fragment.RequestFrg"
+        android:label="TabRequestFrg"
+        tools:layout="@layout/frg_request" />
+    <fragment
+        android:id="@+id/createMessageWithFriendsFrg"
+        android:name="com.rikkei.tranning.basekotlin.fragment.CreateMessageWithFriendsFrg"
+        android:label="CreateMessageWithFriendsFrg"
+        tools:layout="@layout/frg_create_message">
+        <action
+            android:id="@+id/action_createMessageWithFriendsFrg_to_chatRoomFrg"
+            app:destination="@id/chatRoomFrg"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatRoomFrg"
+        android:name="com.rikkei.tranning.basekotlin.fragment.ChatRoomFrg"
+        android:label="ChatRoomFrg"
+        tools:layout="@layout/frg_chat_room">
+        <action
+            android:id="@+id/action_chatRoomFrg_to_mainChatFrg"
+            app:destination="@id/mainChatFrg"
+            app:popUpTo="@id/mainChatFrg"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

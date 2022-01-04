@@ -11,12 +11,12 @@ class ForgotVM @Inject constructor() : BaseViewModel() {
     private val user: User? = null
     fun validate(email: String): Int {
         user?.Email = email
-        if (email.isEmpty()) {
-            return ERROR_EMAIL
+        return if (email.isEmpty()) {
+            ERROR_EMAIL
         } else if (!isEmailInvalid(email)) {
-            return INVALID_EMAIL
+            INVALID_EMAIL
         } else {
-            return SUCCESS
+            SUCCESS
         }
     }
 
@@ -34,8 +34,8 @@ class ForgotVM @Inject constructor() : BaseViewModel() {
     }
 
     companion object {
-        const val SUCCESS: Int = 201
-        const val INVALID_EMAIL: Int = 401
-        const val ERROR_EMAIL: Int = 404
+        internal const val SUCCESS: Int = 201
+        internal const val INVALID_EMAIL: Int = 401
+        internal const val ERROR_EMAIL: Int = 404
     }
 }

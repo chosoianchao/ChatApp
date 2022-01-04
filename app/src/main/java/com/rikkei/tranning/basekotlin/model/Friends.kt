@@ -6,34 +6,26 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @IgnoreExtraProperties
-data class User(
+data class Friends(
     var Date: String? = "",
-    var Email: String = "",
     var Description: String = "",
+    var Time: String = "",
     var Id: String = "",
     var Name: String = "",
-    var Password: String = "",
-    var Phone: String = "",
     var PhotoUrl: String = "",
 ) : Parcelable {
-
-    override fun toString(): String {
-        return "User(Date=$Date, Email='$Email', Description='$Description', Id='$Id', Name='$Name', Password='$Password', Phone='$Phone', PhotoUrl='$PhotoUrl')"
-    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as User
+        other as Friends
 
         if (Date != other.Date) return false
-        if (Email != other.Email) return false
         if (Description != other.Description) return false
+        if (Time != other.Time) return false
         if (Id != other.Id) return false
         if (Name != other.Name) return false
-        if (Password != other.Password) return false
-        if (Phone != other.Phone) return false
         if (PhotoUrl != other.PhotoUrl) return false
 
         return true
@@ -41,13 +33,16 @@ data class User(
 
     override fun hashCode(): Int {
         var result = Date?.hashCode() ?: 0
-        result = 31 * result + Email.hashCode()
         result = 31 * result + Description.hashCode()
+        result = 31 * result + Time.hashCode()
         result = 31 * result + Id.hashCode()
         result = 31 * result + Name.hashCode()
-        result = 31 * result + Password.hashCode()
-        result = 31 * result + Phone.hashCode()
         result = 31 * result + PhotoUrl.hashCode()
         return result
     }
+
+    override fun toString(): String {
+        return "Friends(Date=$Date, Description='$Description', Time='$Time', Id='$Id', Name='$Name', PhotoUrl='$PhotoUrl')"
+    }
+
 }

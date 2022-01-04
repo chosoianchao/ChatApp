@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.rikkei.tranning.basekotlin.viewmodel.CreateMessageWithFriendsVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_all_chat">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_50"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_back_arrow"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/rv_list_message"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/tv_create_message"
+            app:layout_constraintHeight_percent="0.04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseAppTint" />
+
+        <TextView
+            android:id="@+id/tv_create_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:text="@string/create_message"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintBottom_toTopOf="@id/rv_list_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_30"
+            android:text="@string/cancel"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_create_message"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_message"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/bg_corners"
+            app:layout_constraintBottom_toTopOf="@id/iv_user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_back"
+            tools:listitem="@layout/item_all_friends" />
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#F6F6F6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_list_message" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_eclipse"
+            app:layout_constraintBottom_toBottomOf="@id/iv_forward"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/iv_forward"
+            app:layout_constraintHeight_percent="0.08"
+            app:layout_constraintStart_toStartOf="@id/iv_forward"
+            app:layout_constraintTop_toTopOf="@id/iv_forward" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_user"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:src="@drawable/ic_user"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/iv_back"
+            app:layout_constraintHeight_percent="0.09"
+            app:layout_constraintStart_toStartOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/rv_list_message" />
+
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp_50"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_delete"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/iv_user"
+            app:layout_constraintStart_toStartOf="@id/iv_user"
+            app:layout_constraintTop_toTopOf="@id/iv_user"
+            app:layout_constraintWidth_percent="0.06" />
+
+        <ImageView
+            android:id="@+id/iv_forward"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_forward"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/tv_cancel"
+            app:layout_constraintStart_toStartOf="@id/tv_cancel"
+            app:layout_constraintTop_toTopOf="@id/iv_user"
+            app:layout_constraintWidth_percent="0.08" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

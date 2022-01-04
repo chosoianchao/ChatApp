@@ -34,23 +34,8 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/sp_16"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/bt_add_friend"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_avatar"
         app:layout_constraintTop_toTopOf="@id/iv_avatar" />
 
-    <Button
-        android:id="@+id/bt_add_friend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginEnd="@dimen/dp_10"
-        android:background="@drawable/bg_button"
-        android:text="@string/add_friend"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="@dimen/sp_14"
-        app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_name"
-        app:layout_constraintTop_toTopOf="@id/iv_avatar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

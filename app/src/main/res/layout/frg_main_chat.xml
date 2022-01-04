@@ -23,10 +23,8 @@
             android:background="@drawable/bg_corners"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ic_view_search"
-            tools:listitem="@layout/item_all_chat" />
+            app:layout_constraintTop_toBottomOf="@id/textMessage" />
 
         <TextView
             android:id="@+id/textMessage"
@@ -58,18 +56,5 @@
             app:layout_constraintWidth_percent="0.1"
             tools:ignore="ContentDescription" />
 
-        <include
-            android:id="@+id/ic_view_search"
-            layout="@layout/view_search_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_100"
-            android:layout_marginEnd="@dimen/dp_20"
-            app:layout_constraintBottom_toTopOf="@id/rv_list_chat"
-            app:layout_constraintEnd_toEndOf="@id/iv_create_new_message"
-            app:layout_constraintStart_toStartOf="@id/textMessage"
-            app:layout_constraintTop_toBottomOf="@id/textMessage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

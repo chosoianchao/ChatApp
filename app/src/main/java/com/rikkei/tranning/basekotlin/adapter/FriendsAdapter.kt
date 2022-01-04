@@ -10,25 +10,25 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.rikkei.tranning.basekotlin.FriendsDiffCallBack
 import com.rikkei.tranning.basekotlin.OnActionCallBack
 import com.rikkei.tranning.basekotlin.R
-import com.rikkei.tranning.basekotlin.UserDiffCallBack
-import com.rikkei.tranning.basekotlin.model.User
+import com.rikkei.tranning.basekotlin.model.Friends
 
 
-class RequestAdapter(
+class FriendsAdapter(
     val context: Context?,
-    var user: List<User>,
+    var friends: List<Friends>,
     var callBack: OnActionCallBack,
 ) :
-    RecyclerView.Adapter<RequestAdapter.Companion.RequestViewHolder>() {
+    RecyclerView.Adapter<FriendsAdapter.Companion.RequestViewHolder>() {
 
-    fun updateUserListItems(userList: List<User>) {
-        val oldList = user
+    fun updateFriendsListItems(friendsList: List<Friends>) {
+        val oldList = friends
         val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(
-            UserDiffCallBack(oldList, userList)
+            FriendsDiffCallBack(oldList, friendsList)
         )
-        user = userList
+        friends = friendsList
         diffResult.dispatchUpdatesTo(this)
     }
 
@@ -39,14 +39,14 @@ class RequestAdapter(
     }
 
     override fun onBindViewHolder(holder: RequestViewHolder, position: Int) {
-        val mUser: User = user[position]
-        holder.name.text = mUser.Name
-        if (mUser.PhotoUrl == "") {
+        val mFriends: Friends = friends[position]
+        holder.name.text = mFriends.Name
+        if (mFriends.PhotoUrl == "") {
             holder.avatar.setImageResource(R.drawable.ic_user)
         } else {
             context.let {
                 if (it != null) {
-                    Glide.with(it).load(mUser.PhotoUrl).into(holder.avatar)
+                    Glide.with(it).load(mFriends.PhotoUrl).into(holder.avatar)
                 }
             }
         }
@@ -57,13 +57,13 @@ class RequestAdapter(
                     androidx.appcompat.R.anim.abc_popup_enter
                 )
             )
-            callBack.callBack(mUser, ADD_FRIENDS)
+            callBack.callBack(mFriends, MESSAGE)
+            callBack.callBack(mFriends, "ChatRoom")
         }
     }
 
-
     override fun getItemCount(): Int {
-        return user.size
+        return friends.size
     }
 
     companion object {
@@ -73,6 +73,7 @@ class RequestAdapter(
             val avatar: ImageView = itemView.findViewById(R.id.iv_avatar)
         }
 
-        internal const val ADD_FRIENDS: String = "ADD_FRIENDS"
+        const val MESSAGE: String = "Message"
     }
 }
+

@@ -96,13 +96,15 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
             val name = viewBinding.edtFullName.text.toString()
             val phone = viewBinding.edtPhone.text.toString()
             val date = viewBinding.edtDate.text.toString()
+            val desc = viewBinding.edtDesc.text.toString()
             when (viewBinding.ivAvatar.tag) {
-                null -> viewModel.upload(name, phone, date, ::loadingSuccess)
+                null -> viewModel.upload(name, phone, date, desc, ::loadingSuccess)
                 else -> viewModel.updateProfile(
                     name,
                     phone,
                     date,
                     viewBinding.ivAvatar.tag as Uri,
+                    desc,
                     ::loadingSuccess
                 )
             }
@@ -146,19 +148,21 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
             viewBinding.ivAvatar.tag = uri
         }
 
-    private fun getInformation(name: Any?, phone: Any?, date: Any?, photo: Any?) {
+    private fun getInformation(name: Any?, phone: Any?, date: Any?, photo: Any?, desc: Any?) {
         viewBinding.loadingInformation.visibility = View.GONE
         when (photo) {
             null, "" -> {
                 viewBinding.edtFullName.setText(name.toString())
                 viewBinding.edtPhone.setText(phone.toString())
                 viewBinding.edtDate.setText(date.toString())
+                viewBinding.edtDesc.setText(date.toString())
                 viewBinding.ivAvatar.setImageResource(R.drawable.ic_user)
             }
             else -> {
                 viewBinding.edtFullName.setText(name.toString())
                 viewBinding.edtPhone.setText(phone.toString())
                 viewBinding.edtDate.setText(date.toString())
+                viewBinding.edtDesc.setText(desc.toString())
                 context?.let { Glide.with(it).load(photo).into(viewBinding.ivAvatar) }
             }
         }

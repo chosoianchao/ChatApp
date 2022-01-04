@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.rikkei.tranning.basekotlin.viewmodel.tabfriendsvm.TabAllVM" />
@@ -16,8 +15,8 @@
         android:background="#EFEEEE">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_list_friend"
-            android:layout_width="0dp"
+            android:id="@+id/rv_list_user"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_corners"
             app:layout_constraintBottom_toBottomOf="parent"

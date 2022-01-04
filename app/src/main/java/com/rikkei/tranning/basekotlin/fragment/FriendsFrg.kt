@@ -37,7 +37,6 @@ class FriendsFrg : BaseFragment<FrgFriendsBinding>() {
             when (position) {
                 0 -> tab.text = "Friends"
                 1 -> tab.text = "ALL"
-                2 -> tab.text = "REQUEST"
             }
         }.attach()
     }

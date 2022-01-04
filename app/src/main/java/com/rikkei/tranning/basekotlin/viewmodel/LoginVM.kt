@@ -13,14 +13,14 @@ class LoginVM @Inject constructor() : BaseViewModel() {
     fun validate(email: String, password: String): Int {
         user?.Email = email
         user?.Password = password
-        if (email.isEmpty()) {
-            return ERROR_EMAIL
+        return if (email.isEmpty()) {
+            ERROR_EMAIL
         } else if (!isEmailInvalid(email)) {
-            return INVALID_EMAIL
+            INVALID_EMAIL
         } else if (password.isEmpty() || password.length <= 5) {
-            return ERROR_PASSWORD
+            ERROR_PASSWORD
         } else {
-            return SUCCESS
+            SUCCESS
         }
     }
 
@@ -28,11 +28,13 @@ class LoginVM @Inject constructor() : BaseViewModel() {
         email: String,
         password: String,
         actionSuccess: () -> Unit,
+        actionValidateEmail: () -> Unit,
         actionFailed: () -> Unit
     ) {
         user?.Email = email
         user?.Password = password
 
+        // if (mUser?.isEmailVerified == true) {
         auth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 actionSuccess()
@@ -40,6 +42,10 @@ class LoginVM @Inject constructor() : BaseViewModel() {
         }?.addOnFailureListener {
             actionFailed()
         }
+        //  }
+//        else{
+//            actionValidateEmail
+//        }
     }
 
     fun accountExists(action: () -> Unit) {
@@ -49,9 +55,9 @@ class LoginVM @Inject constructor() : BaseViewModel() {
     }
 
     companion object {
-        const val INVALID_EMAIL: Int = 401
-        const val ERROR_EMAIL: Int = 404
-        const val ERROR_PASSWORD: Int = 402
-        const val SUCCESS: Int = 201
+        internal const val INVALID_EMAIL: Int = 401
+        internal const val ERROR_EMAIL: Int = 404
+        internal const val ERROR_PASSWORD: Int = 402
+        internal const val SUCCESS: Int = 201
     }
 }

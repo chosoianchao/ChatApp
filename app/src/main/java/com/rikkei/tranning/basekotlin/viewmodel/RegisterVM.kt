@@ -60,17 +60,19 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         ref?.child(EMAIL)?.setValue(email)
         ref?.child(PHONE)?.setValue("")
         ref?.child(DATE)?.setValue("")
+        ref?.child(DESC)?.setValue("")
         ref?.child(PHOTO)?.setValue("")
         ref?.child(PASSWORD)?.setValue("")
     }
 
     companion object {
-        const val INVALID_EMAIL: Int = 401
-        const val ERROR_PASSWORD: Int = 402
-        const val ERROR_NAME: Int = 403
-        const val ERROR_EMAIL: Int = 404
-        const val SUCCESS: Int = 201
+        internal const val INVALID_EMAIL: Int = 401
+        internal const val ERROR_PASSWORD: Int = 402
+        internal const val ERROR_NAME: Int = 403
+        internal const val ERROR_EMAIL: Int = 404
+        internal const val SUCCESS: Int = 201
         private const val USERS: String = "Users"
+        private const val DESC: String = "Description"
         private const val ID: String = "Id"
         private const val NAME: String = "Name"
         private const val EMAIL: String = "Email"

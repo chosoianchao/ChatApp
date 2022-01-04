@@ -35,24 +35,29 @@ class RegisterFrg : BaseFragment<FrgRegisterBinding>() {
             val name = viewBinding.editName.text.toString()
             val email = viewBinding.editEmail.text.toString()
             val password = viewBinding.editPassword.text.toString()
-            val rs = viewModel.validate(name, email, password)
-            if (rs == ERROR_NAME) {
-                context?.showToastShort(getString(R.string.text_validate_name))
-            } else if (rs == ERROR_EMAIL) {
-                context?.showToastShort(getString(R.string.text_validate_email))
-            } else if (rs == INVALID_EMAIL) {
-                context?.showToastShort(getString(R.string.text_write_valid_email))
-            } else if (rs == ERROR_PASSWORD) {
-                context?.showToastShort(getString(R.string.text_password_validate))
-            } else {
-                viewModel.register(
-                    name,
-                    email,
-                    password,
-                    ::registerSuccess,
-                    ::registerFailed,
-                    ::emailSent
-                )
+            when (viewModel.validate(name, email, password)) {
+                ERROR_NAME -> {
+                    context?.showToastShort(getString(R.string.text_validate_name))
+                }
+                ERROR_EMAIL -> {
+                    context?.showToastShort(getString(R.string.text_validate_email))
+                }
+                INVALID_EMAIL -> {
+                    context?.showToastShort(getString(R.string.text_write_valid_email))
+                }
+                ERROR_PASSWORD -> {
+                    context?.showToastShort(getString(R.string.text_password_validate))
+                }
+                else -> {
+                    viewModel.register(
+                        name,
+                        email,
+                        password,
+                        ::registerSuccess,
+                        ::registerFailed,
+                        ::emailSent
+                    )
+                }
             }
         }
 

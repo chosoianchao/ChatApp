@@ -64,4 +64,15 @@ or Password is needed 6 characters</string>
     <string name="to_send_friends">TO SEND FRIENDS</string>
     <string name="friend_request">FRIEND REQUEST</string>
     <string name="text_time">24:00</string>
+    <string name="send_friend_request">Send Friend Request</string>
+    <string name="cancel_friend_request">Cancel Friend Request</string>
+    <string name="accept_friends_request">Accept Friends Request</string>
+    <string name="text_description">Description</string>
+    <string name="text_validated_email">You haven\'t verified your email</string>
+    <string name="text_decline_request">Decline friend request</string>
+    <string name="text_unfriend">UnFriend This Person</string>
+    <string name="create_message">Create Message</string>
+    <string name="cancel">Cancel</string>
+    <string name="empty_message">You can\'t sent empty message</string>
+    <string name="text_today">Today</string>
 </resources>

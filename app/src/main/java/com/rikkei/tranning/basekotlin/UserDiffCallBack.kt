@@ -3,7 +3,7 @@ package com.rikkei.tranning.basekotlin
 import androidx.recyclerview.widget.DiffUtil
 import com.rikkei.tranning.basekotlin.model.User
 
-class UserDiffCallBack(var oldUserList: List<User>, var newUserList: List<User>) :
+class UserDiffCallBack(private var oldUserList: List<User>, private var newUserList: List<User>) :
     DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {

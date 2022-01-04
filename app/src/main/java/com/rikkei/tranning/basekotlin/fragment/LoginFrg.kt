@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.base.BaseFragment
 import com.rikkei.tranning.basekotlin.databinding.FrgLoginBinding
+import com.rikkei.tranning.basekotlin.showToastLong
 import com.rikkei.tranning.basekotlin.showToastShort
 import com.rikkei.tranning.basekotlin.viewmodel.LoginVM
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,15 +28,19 @@ class LoginFrg : BaseFragment<FrgLoginBinding>() {
         viewBinding.buttonLogin.setOnClickListener {
             val email = viewBinding.editEmail.text.toString()
             val password = viewBinding.editPassword.text.toString()
-            val rs = viewModel.validate(email, password)
-            if (rs == LoginVM.ERROR_EMAIL) {
-                context?.showToastShort(getString(R.string.text_validate_email))
-            } else if (rs == LoginVM.INVALID_EMAIL) {
-                context?.showToastShort(getString(R.string.text_write_valid_email))
-            } else if (rs == LoginVM.ERROR_PASSWORD) {
-                context?.showToastShort(getString(R.string.text_password_validate))
-            } else {
-                viewModel.login(email, password, ::loginSuccess, ::loginFailed)
+            when (viewModel.validate(email, password)) {
+                LoginVM.ERROR_EMAIL -> {
+                    context?.showToastShort(getString(R.string.text_validate_email))
+                }
+                LoginVM.INVALID_EMAIL -> {
+                    context?.showToastShort(getString(R.string.text_write_valid_email))
+                }
+                LoginVM.ERROR_PASSWORD -> {
+                    context?.showToastShort(getString(R.string.text_password_validate))
+                }
+                else -> {
+                    viewModel.login(email, password, ::loginSuccess, ::loginFailed, ::validateEmail)
+                }
             }
         }
         viewBinding.textForgetPassword.setOnClickListener {
@@ -44,6 +49,10 @@ class LoginFrg : BaseFragment<FrgLoginBinding>() {
         viewBinding.textSignupNow.setOnClickListener {
             openRegisterFragment()
         }
+    }
+
+    private fun validateEmail() {
+        context?.showToastLong(getString(R.string.text_validated_email))
     }
 
     private fun accountExists() {
