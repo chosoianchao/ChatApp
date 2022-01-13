@@ -38,7 +38,6 @@ class CreateMessageWithFriendsFrg : BaseFragment<FrgCreateMessageBinding>(), OnA
     }
 
     private fun showListRequest() {
-
         viewBinding.rvListMessage.layoutManager = LinearLayoutManager(context)
         viewBinding.rvListMessage.hasFixedSize()
         viewBinding.rvListMessage.addItemDecoration(
@@ -47,7 +46,9 @@ class CreateMessageWithFriendsFrg : BaseFragment<FrgCreateMessageBinding>(), OnA
                 LinearLayoutManager.VERTICAL
             )
         )
-
+        viewBinding.ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
         if (viewModel.liveListFriends.value != null) {
             val friendsAdapter = FriendsAdapter(
                 context, viewModel.liveListFriends.value!!,
@@ -69,12 +70,14 @@ class CreateMessageWithFriendsFrg : BaseFragment<FrgCreateMessageBinding>(), OnA
                 context?.let {
                     Glide.with(it).load(friends.PhotoUrl).into(viewBinding.ivUser)
                     viewBinding.ivUser.visibility = View.VISIBLE
+                    viewBinding.ivForward.isEnabled = true
                     viewBinding.ivDelete.visibility = View.VISIBLE
                 }
             }
             viewBinding.ivDelete.setOnClickListener {
-                viewBinding.ivUser.visibility = View.INVISIBLE
+                viewBinding.ivUser.setImageResource(android.R.color.transparent)
                 viewBinding.ivDelete.visibility = View.INVISIBLE
+                viewBinding.ivForward.isEnabled = false
             }
             viewBinding.ivForward.setOnClickListener {
                 val bundle = bundleOf(

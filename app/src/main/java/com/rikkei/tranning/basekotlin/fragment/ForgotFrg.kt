@@ -27,13 +27,16 @@ class ForgotFrg : BaseFragment<FrgForgetPasswordBinding>() {
     override fun initViews() {
         viewBinding.btConfirm.setOnClickListener {
             val email = viewBinding.editEmail.text.toString()
-            val rs = viewModel.validate(email)
-            if (rs == ForgotVM.ERROR_EMAIL) {
-                context?.showToastShort(getString(R.string.text_validate_email))
-            } else if (rs == ForgotVM.INVALID_EMAIL) {
-                context?.showToastShort(getString(R.string.text_validate_email))
-            } else {
-                viewModel.forgotPassword(email, ::forgotSuccess, ::emailInvalid)
+            when (viewModel.validate(email)) {
+                ForgotVM.ERROR_EMAIL -> {
+                    context?.showToastShort(getString(R.string.text_validate_email))
+                }
+                ForgotVM.INVALID_EMAIL -> {
+                    context?.showToastShort(getString(R.string.text_validate_email))
+                }
+                else -> {
+                    viewModel.forgotPassword(email, ::forgotSuccess)
+                }
             }
         }
         viewBinding.imageBack.setOnClickListener {
@@ -44,9 +47,5 @@ class ForgotFrg : BaseFragment<FrgForgetPasswordBinding>() {
     private fun forgotSuccess() {
         context?.showToastLong(getString(R.string.text_send_to_email))
         findNavController().popBackStack()
-    }
-
-    private fun emailInvalid() {
-        context?.showToastShort(getString(R.string.error_something_wrong))
     }
 }

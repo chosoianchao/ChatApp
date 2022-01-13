@@ -1,5 +1,6 @@
 package com.rikkei.tranning.basekotlin.viewmodel
 
+import com.google.firebase.messaging.FirebaseMessaging
 import com.rikkei.tranning.basekotlin.base.BaseViewModel
 import com.rikkei.tranning.basekotlin.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,12 +14,12 @@ class PersonalPageVM @Inject constructor() : BaseViewModel() {
         loadingSuccess: (mEmail: Any?, mMame: Any?, mPhoto: Any?) -> Unit,
     ) {
         mUser?.uid?.let {
-            root?.database?.reference?.child(USERS)?.child(it)?.get()
+            root?.database?.reference?.child("Users")?.child(it)?.get()
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val email = task.result.child(EMAIL).value
-                        val name = task.result.child(NAME).value
-                        val photo = task.result.child(PHOTO).value
+                        val email = task.result.child("Email").value
+                        val name = task.result.child("Name").value
+                        val photo = task.result.child("PhotoUrl").value
                         user?.Email = email.toString()
                         user?.Name = name.toString()
                         user?.PhotoUrl = photo.toString()
@@ -32,10 +33,11 @@ class PersonalPageVM @Inject constructor() : BaseViewModel() {
         auth?.signOut()
     }
 
-    companion object {
-        private const val EMAIL: String = "Email"
-        private const val NAME: String = "Name"
-        private const val USERS: String = "Users"
-        private const val PHOTO: String = "PhotoUrl"
+    fun enableNotification() {
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/${mUser?.uid}")
+    }
+
+    fun disableNotification() {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("/topics/${mUser?.uid}")
     }
 }

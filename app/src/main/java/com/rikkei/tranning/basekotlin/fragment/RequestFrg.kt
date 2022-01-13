@@ -1,10 +1,8 @@
 package com.rikkei.tranning.basekotlin.fragment
 
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
-import com.rikkei.tranning.basekotlin.CommonUtils
 import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.base.BaseFragment
 import com.rikkei.tranning.basekotlin.databinding.FrgRequestBinding
@@ -27,15 +25,12 @@ class RequestFrg : BaseFragment<FrgRequestBinding>() {
 
     override fun initViews() {
         val bundle = arguments
-        val user = bundle?.getParcelable<User>(DATA_USER)!!
+        val user = bundle?.getParcelable<User>("DATA_USER")!!
 
         viewBinding.tvName.text = user.Name
         viewBinding.tvDob.text = user.Date
         viewBinding.tvDesc.text = user.Description
 
-        viewBinding.btAdd.text = CommonUtils.instance?.getPref("StateButton")
-
-        Log.d("Thang", "initViews() called" + CommonUtils.instance?.getPref("StateButton"))
         if (user.PhotoUrl == "") {
             viewBinding.tvName.text = user.Name
             viewBinding.tvDob.text = user.Date
@@ -77,17 +72,6 @@ class RequestFrg : BaseFragment<FrgRequestBinding>() {
 
     private fun sendAction() {
         viewBinding.btAdd.text = getString(R.string.cancel_friend_request)
-    }
-
-    override fun onDestroy() {
-        CommonUtils.instance?.savePref("StateButton", viewBinding.btAdd.text.toString())
-        Log.d("Thang", "onDestroy() called ${viewBinding.btAdd.text}")
-        Log.d("Thang", "onDestroy() called")
-        super.onDestroy()
-    }
-
-    companion object {
-        private const val DATA_USER: String = "DATA_USER"
     }
 }
 

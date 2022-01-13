@@ -28,13 +28,11 @@ class LoginVM @Inject constructor() : BaseViewModel() {
         email: String,
         password: String,
         actionSuccess: () -> Unit,
-        actionValidateEmail: () -> Unit,
         actionFailed: () -> Unit
     ) {
         user?.Email = email
         user?.Password = password
 
-        // if (mUser?.isEmailVerified == true) {
         auth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 actionSuccess()
@@ -42,10 +40,6 @@ class LoginVM @Inject constructor() : BaseViewModel() {
         }?.addOnFailureListener {
             actionFailed()
         }
-        //  }
-//        else{
-//            actionValidateEmail
-//        }
     }
 
     fun accountExists(action: () -> Unit) {

@@ -1,9 +1,9 @@
-package com.rikkei.tranning.basekotlin
+package com.rikkei.tranning.basekotlin.diff
 
 import androidx.recyclerview.widget.DiffUtil
 import com.rikkei.tranning.basekotlin.model.Friends
 
-class FriendsDiffCallBack(
+class FriendsDiff(
     private var oldFriendsList: List<Friends>,
     private var newFriendsList: List<Friends>
 ) :

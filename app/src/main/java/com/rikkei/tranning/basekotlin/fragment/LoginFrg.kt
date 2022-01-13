@@ -21,10 +21,13 @@ class LoginFrg : BaseFragment<FrgLoginBinding>() {
 
     override val viewModel: LoginVM by viewModels()
 
-    override fun initViews() {
+    override fun onStart() {
+        super.onStart()
         viewModel.accountExists(::accountExists)
+    }
 
-        getBackStackData(BUNDLE_KEY, ::onResult)
+    override fun initViews() {
+        getBackStackData("bundleKey", ::onResult)
         viewBinding.buttonLogin.setOnClickListener {
             val email = viewBinding.editEmail.text.toString()
             val password = viewBinding.editPassword.text.toString()
@@ -61,8 +64,8 @@ class LoginFrg : BaseFragment<FrgLoginBinding>() {
     }
 
     private fun onResult(bundle: Bundle) {
-        val m = bundle.getString(EMAIL)
-        val p = bundle.getString(PASSWORD)
+        val m = bundle.getString("email")
+        val p = bundle.getString("password")
         viewBinding.editEmail.setText(m)
         viewBinding.editPassword.setText(p)
     }
@@ -92,11 +95,5 @@ class LoginFrg : BaseFragment<FrgLoginBinding>() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@LoginFrg.viewModel
         }
-    }
-
-    companion object {
-        private const val EMAIL: String = "email"
-        private const val BUNDLE_KEY: String = "bundleKey"
-        private const val PASSWORD: String = "password"
     }
 }

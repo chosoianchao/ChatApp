@@ -31,8 +31,7 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         email: String,
         password: String,
         actionSuccess: () -> Unit,
-        actionFailed: () -> Unit,
-        emailSent: () -> Unit,
+        actionFailed: () -> Unit
     ) {
         user?.Name = name
         user?.Email = email
@@ -41,11 +40,6 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         auth?.createUserWithEmailAndPassword(email, password)?.addOnCompleteListener {
             if (it.isSuccessful) {
                 actionSuccess()
-                mUser?.sendEmailVerification()?.addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        emailSent()
-                    }
-                }
                 insertData(name, email)
             }
         }?.addOnFailureListener {
@@ -54,15 +48,15 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
     }
 
     private fun insertData(name: String, email: String) {
-        val ref = mUser?.uid?.let { root?.database?.reference?.child(USERS)?.child(it) }
-        ref?.child(ID)?.setValue(mUser?.uid)
-        ref?.child(NAME)?.setValue(name)
-        ref?.child(EMAIL)?.setValue(email)
-        ref?.child(PHONE)?.setValue("")
-        ref?.child(DATE)?.setValue("")
-        ref?.child(DESC)?.setValue("")
-        ref?.child(PHOTO)?.setValue("")
-        ref?.child(PASSWORD)?.setValue("")
+        val ref = mUser?.uid?.let { root?.database?.reference?.child("Users")?.child(it) }
+        ref?.child("Id")?.setValue(mUser?.uid)
+        ref?.child("Name")?.setValue(name)
+        ref?.child("Email")?.setValue(email)
+        ref?.child("Phone")?.setValue("")
+        ref?.child("Date")?.setValue("")
+        ref?.child("Description")?.setValue("")
+        ref?.child("PhotoUrl")?.setValue("")
+        ref?.child("Password")?.setValue("")
     }
 
     companion object {
@@ -71,14 +65,5 @@ class RegisterVM @Inject constructor() : BaseViewModel() {
         internal const val ERROR_NAME: Int = 403
         internal const val ERROR_EMAIL: Int = 404
         internal const val SUCCESS: Int = 201
-        private const val USERS: String = "Users"
-        private const val DESC: String = "Description"
-        private const val ID: String = "Id"
-        private const val NAME: String = "Name"
-        private const val EMAIL: String = "Email"
-        private const val DATE: String = "Date"
-        private const val PHONE: String = "Phone"
-        private const val PHOTO: String = "PhotoUrl"
-        private const val PASSWORD: String = "Password"
     }
 }

@@ -76,8 +76,8 @@
             android:id="@+id/action_friendsFrg_to_personalPageFrg"
             app:destination="@id/personalPageFrg" />
         <action
-            android:id="@+id/action_friendsFrg_to_tabRequestFrg"
-            app:destination="@id/tabRequestFrg"
+            android:id="@+id/action_friendsFrg_to_tabAllFrg"
+            app:destination="@id/tabAllFrg"
             app:enterAnim="@animator/slide_in_right"
             app:exitAnim="@animator/slide_out_left"
             app:popEnterAnim="@animator/slide_in_left"
@@ -134,5 +134,19 @@
             app:destination="@id/mainChatFrg"
             app:popUpTo="@id/mainChatFrg"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+
+        android:id="@+id/tabAllFrg"
+        android:name="com.rikkei.tranning.basekotlin.fragment.AllUsersFrg"
+        android:label="TabAllFrg"
+        tools:layout="@layout/frg_all_users_fr">
+        <action
+            android:id="@+id/action_tabAllFrg_to_tabRequestFrg"
+            app:destination="@id/tabRequestFrg"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right" />
     </fragment>
 </navigation>

@@ -72,7 +72,25 @@ or Password is needed 6 characters</string>
     <string name="text_decline_request">Decline friend request</string>
     <string name="text_unfriend">UnFriend This Person</string>
     <string name="create_message">Create Message</string>
-    <string name="cancel">Cancel</string>
+    <string name="Cancel">Cancel</string>
     <string name="empty_message">You can\'t sent empty message</string>
     <string name="text_today">Today</string>
+    <string name="text_yesterday">Yesterday</string>
+    <string name="text_choose_language">Choose Language</string>
+    <string name="text_apply">Apply</string>
+    <string name="text_vn">Tiếng Việt</string>
+    <string name="enable">Enable</string>
+    <string name="disable">Disable</string>
+    <string name="text_accept">Accepted friend request</string>
+    <string name="text_sent_request">Sent a friend request</string>
+    <string name="text_delete_message">Do you want to delete the message ?</string>
+    <string name="text_yes">Yes</string>
+    <string name="text_no">No</string>
+    <string name="text_notify">Notification</string>
+    <string name="text_sent_photo">Sent a photo</string>
+    <string name="text_looking_for_conversations">Looking for conversations …</string>
+    <string name="text_take_photo">Take Photo</string>
+    <string name="text_choose_image">Choose from Gallery</string>
+    <string name="text_add_photo">Add photo</string>
+    <string name="cancel">Cancel</string>
 </resources>

@@ -157,30 +157,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dp_2"
-            android:layout_marginEnd="@dimen/dp_8"
             android:gravity="end"
             android:text="@string/english"
             android:textColor="#4356B4"
             android:textSize="@dimen/sp_16"
             app:layout_constraintBottom_toBottomOf="@id/tv_language_1"
-            app:layout_constraintEnd_toStartOf="@id/iv_forward_1"
+            app:layout_constraintEnd_toEndOf="@id/iv_pencil"
             app:layout_constraintStart_toEndOf="@id/tv_language_1"
             app:layout_constraintTop_toTopOf="@id/tv_language_1" />
-
-        <ImageView
-            android:id="@+id/iv_forward_1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_forward"
-            app:layout_constraintBottom_toBottomOf="@id/iv_global"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="@id/iv_pencil"
-            app:layout_constraintStart_toEndOf="@id/tv_language_2"
-            app:layout_constraintTop_toTopOf="@id/iv_global"
-            app:layout_constraintWidth_percent="0.05" />
-
 
         <ImageView
             android:id="@+id/iv_notify"
@@ -201,30 +185,28 @@
             android:id="@+id/tv_notify"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_8"
             android:text="@string/notify"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18"
             app:layout_constraintBottom_toBottomOf="@id/iv_notify"
-            app:layout_constraintEnd_toStartOf="@id/iv_forward_2"
+            app:layout_constraintEnd_toStartOf="@id/tv_notify_2"
             app:layout_constraintStart_toEndOf="@id/iv_notify"
             app:layout_constraintTop_toTopOf="@id/iv_notify" />
 
-
-        <ImageView
-            android:id="@+id/iv_forward_2"
+        <TextView
+            android:id="@+id/tv_notify_2"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_forward"
-            app:layout_constraintBottom_toBottomOf="@id/iv_notify"
-            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginTop="@dimen/dp_2"
+            android:gravity="end"
+            android:text="@string/enable"
+            android:textColor="#4356B4"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@id/tv_notify"
             app:layout_constraintEnd_toEndOf="@id/iv_pencil"
             app:layout_constraintStart_toEndOf="@id/tv_notify"
-            app:layout_constraintTop_toTopOf="@id/iv_notify"
-            app:layout_constraintWidth_percent="0.05" />
-
+            app:layout_constraintTop_toTopOf="@id/tv_notify" />
 
         <ImageView
             android:id="@+id/iv_version"

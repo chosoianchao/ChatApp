@@ -1,7 +1,6 @@
 package com.rikkei.tranning.basekotlin.fragment
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Intent
@@ -55,32 +54,8 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
         viewBinding.ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
-        getImageFromCamera =
-            registerForActivityResult(
-                ActivityResultContracts.StartActivityForResult()
-            ) {
-                if (it.resultCode == RESULT_OK && it.data != null) {
-                    val bundle: Bundle? = it.data!!.extras
-                    val bitmap: Bitmap? = bundle?.get(DATA) as Bitmap?
 
-                    val file = File(context?.cacheDir, CHILD)
-
-                    file.delete()
-                    file.createNewFile()
-                    val fileOutputStream = file.outputStream()
-                    val byteArrayOutputStream = ByteArrayOutputStream()
-                    bitmap?.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-                    val bytearray = byteArrayOutputStream.toByteArray()
-                    fileOutputStream.write(bytearray)
-                    fileOutputStream.flush()
-                    fileOutputStream.close()
-                    byteArrayOutputStream.close()
-
-                    val uri = file.toUri()
-                    viewBinding.ivAvatar.setImageURI(uri)
-                    viewBinding.ivAvatar.tag = uri
-                }
-            }
+        getImageFromCamera()
 
         viewBinding.ivSelectImage.setOnClickListener {
             selectImage()
@@ -116,25 +91,29 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
         context?.showToastLong(getString(R.string.success))
     }
 
-    @SuppressLint("QueryPermissionsNeeded")
     private fun selectImage() {
-        val options = arrayOf<CharSequence>(TAKE_PHOTO, IMAGE_FROM_GALLERY, CANCEL)
+        val options =
+            arrayOf<CharSequence>(
+                getString(R.string.text_take_photo),
+                getString(R.string.text_choose_image),
+                getString(R.string.cancel)
+            )
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-        builder.setTitle(ADD_PHOTO)
+        builder.setTitle(getString(R.string.text_add_photo))
         builder.setItems(options) { dialog, item ->
             when {
-                options[item] == TAKE_PHOTO -> {
+                options[item] == getString(R.string.text_take_photo) -> {
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     activity?.packageManager.let {
-                        if (intent.resolveActivity(it!!) != null) {
+                        if (it?.resolveActivity(intent, 0) != null) {
                             getImageFromCamera?.launch(intent)
                         }
                     }
                 }
-                options[item] == IMAGE_FROM_GALLERY -> {
-                    getImageFromGallery.launch(IMAGE)
+                options[item] == getString(R.string.text_choose_image) -> {
+                    getImageFromGallery.launch("image/*")
                 }
-                options[item] == CANCEL -> {
+                options[item] == getString(R.string.cancel) -> {
                     dialog.dismiss()
                 }
             }
@@ -147,6 +126,35 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
             viewBinding.ivAvatar.setImageURI(uri)
             viewBinding.ivAvatar.tag = uri
         }
+
+    private fun getImageFromCamera() {
+        getImageFromCamera =
+            registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult()
+            ) {
+                if (it.resultCode == RESULT_OK && it.data != null) {
+                    val bundle: Bundle? = it.data!!.extras
+                    val bitmap: Bitmap? = bundle?.get("data") as Bitmap?
+
+                    val file = File(context?.cacheDir, "CUSTOM NAME")
+
+                    file.delete()
+                    file.createNewFile()
+                    val fileOutputStream = file.outputStream()
+                    val byteArrayOutputStream = ByteArrayOutputStream()
+                    bitmap?.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+                    val bytearray = byteArrayOutputStream.toByteArray()
+                    fileOutputStream.write(bytearray)
+                    fileOutputStream.flush()
+                    fileOutputStream.close()
+                    byteArrayOutputStream.close()
+
+                    val uri = file.toUri()
+                    viewBinding.ivAvatar.setImageURI(uri)
+                    viewBinding.ivAvatar.tag = uri
+                }
+            }
+    }
 
     private fun getInformation(name: Any?, phone: Any?, date: Any?, photo: Any?, desc: Any?) {
         viewBinding.loadingInformation.visibility = View.GONE
@@ -166,16 +174,6 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
                 context?.let { Glide.with(it).load(photo).into(viewBinding.ivAvatar) }
             }
         }
-    }
-
-    companion object {
-        private const val IMAGE_FROM_GALLERY: String = "Choose from Gallery"
-        private const val ADD_PHOTO: String = "Add photo"
-        private const val CANCEL: String = "Cancel"
-        private const val TAKE_PHOTO: String = "Take Photo"
-        private const val IMAGE: String = "image/*"
-        private const val DATA: String = "data"
-        private const val CHILD: String = "CUSTOM NAME"
     }
 }
 

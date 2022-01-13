@@ -1,4 +1,4 @@
-package com.rikkei.tranning.basekotlin.fragment.tabfriendsfrg
+package com.rikkei.tranning.basekotlin.fragment
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -9,19 +9,19 @@ import com.rikkei.tranning.basekotlin.OnActionCallBack
 import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.adapter.RequestAdapter
 import com.rikkei.tranning.basekotlin.base.BaseFragment
-import com.rikkei.tranning.basekotlin.databinding.FrgTabAllFrBinding
-import com.rikkei.tranning.basekotlin.viewmodel.tabfriendsvm.TabAllVM
+import com.rikkei.tranning.basekotlin.databinding.FrgAllUsersFrBinding
+import com.rikkei.tranning.basekotlin.viewmodel.AllUsersVM
 
-class TabAllFrg : BaseFragment<FrgTabAllFrBinding>() {
+class AllUsersFrg : BaseFragment<FrgAllUsersFrBinding>() {
     override val layoutResource: Int
-        get() = R.layout.frg_tab_all_fr
+        get() = R.layout.frg_all_users_fr
 
-    override val viewModel: TabAllVM by viewModels()
+    override val viewModel: AllUsersVM by viewModels()
 
     override fun initData() {
         with(viewBinding) {
             lifecycleOwner = viewLifecycleOwner
-            viewModel = this@TabAllFrg.viewModel
+            viewModel = this@AllUsersFrg.viewModel
         }
     }
 
@@ -49,10 +49,10 @@ class TabAllFrg : BaseFragment<FrgTabAllFrBinding>() {
                     override fun callBack(data: Any?, key: String) {
                         if (key == RequestAdapter.ADD_FRIENDS) {
                             val bundle = bundleOf(
-                                DATA_USER to data
+                                "DATA_USER" to data
                             )
                             findNavController().navigate(
-                                R.id.action_friendsFrg_to_tabRequestFrg,
+                                R.id.tabRequestFrg,
                                 bundle
                             )
                         }
@@ -62,9 +62,5 @@ class TabAllFrg : BaseFragment<FrgTabAllFrBinding>() {
             viewBinding.rvListUser.adapter = userAdapter
         }
         viewModel.getData()
-    }
-
-    companion object {
-        const val DATA_USER: String = "DATA_USER"
     }
 }

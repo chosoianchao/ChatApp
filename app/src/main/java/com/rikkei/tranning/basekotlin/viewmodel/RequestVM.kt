@@ -3,8 +3,12 @@ package com.rikkei.tranning.basekotlin.viewmodel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.rikkei.tranning.basekotlin.App
+import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.base.BaseViewModel
 import com.rikkei.tranning.basekotlin.model.User
+import com.rikkei.tranning.basekotlin.notifications.NotificationData
+import com.rikkei.tranning.basekotlin.notifications.PushNotification
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.text.DateFormat
 import java.util.*
@@ -13,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RequestVM @Inject constructor() : BaseViewModel() {
 
-    var currentState: String? = NOT_FRIENDS
+    var currentState: String? = "not_friends"
+    var topic = ""
 
     fun addFriends(
         data: Any?,
@@ -22,118 +27,163 @@ class RequestVM @Inject constructor() : BaseViewModel() {
         unfriendAction: () -> Unit
     ) {
         val user: User = data as User
-        if (currentState == NOT_FRIENDS) {
+        if (currentState == "not_friends") {
             mUser?.uid?.let { send ->
                 user.Id.let { receive ->
                     root?.database?.reference
-                        ?.child(FRIENDS_REQ)
+                        ?.child("Friends_req")
                         ?.child(send)
-                        ?.child(receive)?.child(REQUEST_TYPE)?.setValue(SENT)
+                        ?.child(receive)?.child("request_type")?.setValue("sent")
                         ?.addOnCompleteListener {
                             if (it.isSuccessful) {
                                 root!!.database.reference
-                                    .child(FRIENDS_REQ)
+                                    .child("Friends_req")
                                     .child(receive)
                                     .child(send)
-                                    .child(REQUEST_TYPE)
-                                    .setValue(RECEIVED).addOnSuccessListener {
-                                        currentState = REQUEST_SENT
+                                    .child("request_type")
+                                    .setValue("received").addOnSuccessListener {
+                                        currentState = "req_sent"
                                         sendAction()
+                                        topic = "/topics/${user.Id}"
+                                        mUser?.uid?.let { s ->
+                                            root?.database?.reference?.child("Users")?.child(s)
+                                                ?.get()
+                                                ?.addOnCompleteListener { task ->
+                                                    if (task.isSuccessful) {
+                                                        val name =
+                                                            task.result.child("Name").value.toString()
+                                                        PushNotification(
+                                                            NotificationData(
+                                                                name,
+                                                                App.getInstance()!!
+                                                                    .getString(R.string.text_sent_request)
+                                                            ), topic
+                                                        )
+                                                            .also { pushNotification ->
+                                                                sendNotification(pushNotification)
+                                                            }
+                                                    }
+                                                }
+                                        }
                                     }
                             }
                         }
                 }
             }
         }
-        if (currentState == REQUEST_SENT) {
+        if (currentState == "req_sent") {
             mUser?.uid?.let {
                 root?.database?.reference
-                    ?.child(FRIENDS_REQ)
+                    ?.child("Friends_req")
                     ?.child(it)
                     ?.child(user.Id)
                     ?.removeValue()
                     ?.addOnSuccessListener {
-                        root!!.database.reference.child(FRIENDS_REQ)
+                        root!!.database.reference.child("Friends_req")
                             .child(user.Id)
                             .child(mUser?.uid!!)
                             .removeValue()
                             .addOnSuccessListener {
-                                currentState = NOT_FRIENDS
+                                currentState = "not_friends"
                                 cancelAction()
                             }
                     }
             }
         }
-        if (currentState == REQUEST_RECEIVED) {
+        if (currentState == "request_received") {
             val currentDate = DateFormat.getDateTimeInstance().format(Date())
             mUser?.uid?.let {
-                root?.database?.reference?.child(USERS)?.child(it)?.get()
+                root?.database?.reference?.child("Users")?.child(it)?.get()
                     ?.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            val date = task.result.child(DATE).value
-                            val name = task.result.child(NAME).value
-                            val photo = task.result.child(PHOTO).value
-                            val id = task.result.child(ID).value
-                            val desc = task.result.child(DESC).value
+                            val date = task.result.child("Date").value
+                            val name = task.result.child("Name").value
+                            val photo = task.result.child("PhotoUrl").value
+                            val id = task.result.child("Id").value
+                            val desc = task.result.child("Description").value
                             val currentUser =
-                                root?.database?.reference!!.child(FRIENDS).child(user.Id).child(
+                                root?.database?.reference!!.child("Friends").child(user.Id).child(
                                     mUser!!.uid
                                 )
-                            currentUser.child(NAME).setValue(name)
-                            currentUser.child(PHOTO).setValue(photo)
-                            currentUser.child(ID).setValue(id)
-                            currentUser.child(DATE).setValue(date)
-                            currentUser.child(DESC).setValue(desc)
+                            currentUser.child("Name").setValue(name)
+                            currentUser.child("PhotoUrl").setValue(photo)
+                            currentUser.child("Id").setValue(id)
+                            currentUser.child("Date").setValue(date)
+                            currentUser.child("Description").setValue(desc)
                         }
                     }
             }
             mUser?.uid?.let {
-                root?.database?.reference?.child(FRIENDS)?.child(it)?.child(user.Id)?.child(TIME)
+                root?.database?.reference?.child("Friends")?.child(it)?.child(user.Id)
+                    ?.child("Time")
                     ?.setValue(currentDate)
             }?.addOnSuccessListener {
                 val friendsUser =
-                    root?.database?.reference?.child(FRIENDS)?.child(mUser!!.uid)?.child(user.Id)
-                friendsUser?.child(NAME)?.setValue(user.Name)
-                friendsUser?.child(PHOTO)?.setValue(user.PhotoUrl)
-                friendsUser?.child(ID)?.setValue(user.Id)
-                friendsUser?.child(DATE)?.setValue(user.Date)
-                friendsUser?.child(DESC)?.setValue(user.Description)
-                root?.database?.reference?.child(FRIENDS)?.child(user.Id)
-                    ?.child(mUser?.uid!!)?.child(TIME)
+                    root?.database?.reference?.child("Friends")?.child(mUser!!.uid)?.child(user.Id)
+                friendsUser?.child("Name")?.setValue(user.Name)
+                friendsUser?.child("PhotoUrl")?.setValue(user.PhotoUrl)
+                friendsUser?.child("Id")?.setValue(user.Id)
+                friendsUser?.child("Date")?.setValue(user.Date)
+                friendsUser?.child("Description")?.setValue(user.Description)
+                root?.database?.reference?.child("Friends")?.child(user.Id)
+                    ?.child(mUser?.uid!!)?.child("Time")
                     ?.setValue(currentDate)
                     ?.addOnSuccessListener {
                         mUser?.uid?.let {
                             root?.database?.reference
-                                ?.child(FRIENDS_REQ)
+                                ?.child("Friends_req")
                                 ?.child(it)
                                 ?.child(user.Id)
                                 ?.removeValue()
                                 ?.addOnSuccessListener {
-                                    root!!.database.reference.child(FRIENDS_REQ)
+                                    root!!.database.reference.child("Friends_req")
                                         .child(user.Id)
                                         .child(mUser?.uid!!)
                                         .removeValue()
                                         .addOnSuccessListener {
-                                            currentState = FRIENDS
+                                            currentState = "Friends"
                                             unfriendAction()
+                                            topic = "/topics/${user.Id}"
+                                            mUser?.uid?.let { s ->
+                                                root?.database?.reference?.child("Users")?.child(s)
+                                                    ?.get()
+                                                    ?.addOnCompleteListener { task ->
+                                                        if (task.isSuccessful) {
+                                                            val name =
+                                                                task.result.child("Name").value.toString()
+                                                            PushNotification(
+                                                                NotificationData(
+                                                                    name,
+                                                                    App.getInstance()!!
+                                                                        .getString(R.string.text_accept)
+                                                                ), topic
+                                                            )
+                                                                .also { pushNotification ->
+                                                                    sendNotification(
+                                                                        pushNotification
+                                                                    )
+                                                                }
+                                                        }
+                                                    }
+                                            }
                                         }
                                 }
                         }
                     }
             }
         }
-        if (currentState == FRIENDS) {
+        if (currentState == "Friends") {
             mUser?.uid?.let {
                 root?.database?.reference
-                    ?.child(FRIENDS)
+                    ?.child("Friends")
                     ?.child(it)
                     ?.removeValue()
                     ?.addOnSuccessListener {
-                        root!!.database.reference.child(FRIENDS)
+                        root!!.database.reference.child("Friends")
                             .child(user.Id)
                             .removeValue()
                             .addOnSuccessListener {
-                                currentState = NOT_FRIENDS
+                                currentState = "not_friends"
                                 cancelAction()
                             }
                     }
@@ -148,27 +198,27 @@ class RequestVM @Inject constructor() : BaseViewModel() {
         unfriendAction: () -> Unit
     ) {
         mUser?.uid?.let {
-            root?.database?.reference?.child(FRIENDS_REQ)?.child(it)
+            root?.database?.reference?.child("Friends_req")?.child(it)
                 ?.addListenerForSingleValueEvent(object :
                     ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.hasChild(user.Id)) {
                             val requestType: String =
-                                snapshot.child(user.Id).child(REQUEST_TYPE).value.toString()
-                            if (requestType == RECEIVED) {
-                                currentState = REQUEST_RECEIVED
+                                snapshot.child(user.Id).child("request_type").value.toString()
+                            if (requestType == "received") {
+                                currentState = "request_received"
                                 actionAccept()
-                            } else if (requestType == SENT) {
-                                currentState = REQUEST_SENT
+                            } else if (requestType == "sent") {
+                                currentState = "req_sent"
                                 actionCancel()
                             }
                         } else {
-                            root!!.database.reference.child(FRIENDS).child(mUser!!.uid)
+                            root!!.database.reference.child("Friends").child(mUser!!.uid)
                                 .addListenerForSingleValueEvent(object :
                                     ValueEventListener {
                                     override fun onDataChange(snapshot: DataSnapshot) {
                                         if (snapshot.hasChild(user.Id)) {
-                                            currentState = FRIENDS
+                                            currentState = "Friends"
                                             unfriendAction()
                                         }
                                     }
@@ -190,38 +240,20 @@ class RequestVM @Inject constructor() : BaseViewModel() {
     fun declineFriends(user: User, declineAction: () -> Unit) {
         mUser?.uid?.let {
             root?.database?.reference
-                ?.child(FRIENDS_REQ)
+                ?.child("Friends_req")
                 ?.child(it)
                 ?.child(user.Id)
                 ?.removeValue()
                 ?.addOnSuccessListener {
-                    root!!.database.reference.child(FRIENDS_REQ)
+                    root!!.database.reference.child("Friends_req")
                         .child(user.Id)
                         .child(mUser?.uid!!)
                         .removeValue()
                         .addOnSuccessListener {
-                            currentState = NOT_FRIENDS
+                            currentState = "not_friends"
                             declineAction()
                         }
                 }
         }
-    }
-
-    companion object {
-        internal const val NOT_FRIENDS: String = "not_friends"
-        internal const val FRIENDS: String = "Friends"
-        private const val PHOTO: String = "PhotoUrl"
-        private const val TIME: String = "Time"
-        private const val ID: String = "Id"
-        private const val USERS: String = "Users"
-        private const val NAME: String = "Name"
-        private const val DATE: String = "Date"
-        private const val DESC: String = "Description"
-        internal const val REQUEST_SENT: String = "req_sent"
-        private const val REQUEST_TYPE: String = "request_type"
-        private const val REQUEST_RECEIVED: String = "request_received"
-        private const val FRIENDS_REQ: String = "Friends_req"
-        private const val RECEIVED: String = "received"
-        private const val SENT: String = "sent"
     }
 }

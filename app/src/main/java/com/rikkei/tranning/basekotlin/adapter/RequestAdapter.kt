@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rikkei.tranning.basekotlin.OnActionCallBack
 import com.rikkei.tranning.basekotlin.R
-import com.rikkei.tranning.basekotlin.UserDiffCallBack
+import com.rikkei.tranning.basekotlin.diff.UserDiff
 import com.rikkei.tranning.basekotlin.model.User
 
 
@@ -26,7 +26,7 @@ class RequestAdapter(
     fun updateUserListItems(userList: List<User>) {
         val oldList = user
         val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(
-            UserDiffCallBack(oldList, userList)
+            UserDiff(oldList, userList)
         )
         user = userList
         diffResult.dispatchUpdatesTo(this)

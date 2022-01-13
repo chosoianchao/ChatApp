@@ -10,9 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.rikkei.tranning.basekotlin.FriendsDiffCallBack
 import com.rikkei.tranning.basekotlin.OnActionCallBack
 import com.rikkei.tranning.basekotlin.R
+import com.rikkei.tranning.basekotlin.diff.FriendsDiff
 import com.rikkei.tranning.basekotlin.model.Friends
 
 
@@ -26,7 +26,7 @@ class FriendsAdapter(
     fun updateFriendsListItems(friendsList: List<Friends>) {
         val oldList = friends
         val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(
-            FriendsDiffCallBack(oldList, friendsList)
+            FriendsDiff(oldList, friendsList)
         )
         friends = friendsList
         diffResult.dispatchUpdatesTo(this)
@@ -58,7 +58,6 @@ class FriendsAdapter(
                 )
             )
             callBack.callBack(mFriends, MESSAGE)
-            callBack.callBack(mFriends, "ChatRoom")
         }
     }
 
@@ -73,7 +72,7 @@ class FriendsAdapter(
             val avatar: ImageView = itemView.findViewById(R.id.iv_avatar)
         }
 
-        const val MESSAGE: String = "Message"
+        internal const val MESSAGE: String = "Message"
     }
 }
 

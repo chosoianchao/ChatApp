@@ -6,7 +6,6 @@ import androidx.navigation.fragment.findNavController
 import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.base.BaseFragment
 import com.rikkei.tranning.basekotlin.databinding.FrgRegisterBinding
-import com.rikkei.tranning.basekotlin.showToastLong
 import com.rikkei.tranning.basekotlin.showToastShort
 import com.rikkei.tranning.basekotlin.viewmodel.RegisterVM
 import com.rikkei.tranning.basekotlin.viewmodel.RegisterVM.Companion.ERROR_EMAIL
@@ -54,8 +53,7 @@ class RegisterFrg : BaseFragment<FrgRegisterBinding>() {
                         email,
                         password,
                         ::registerSuccess,
-                        ::registerFailed,
-                        ::emailSent
+                        ::registerFailed
                     )
                 }
             }
@@ -69,28 +67,18 @@ class RegisterFrg : BaseFragment<FrgRegisterBinding>() {
         }
     }
 
-    private fun emailSent() {
-        context?.showToastLong(getString(R.string.text_verify_email))
-    }
-
     private fun registerSuccess() {
         val email = viewBinding.editEmail.text.toString()
         val password = viewBinding.editPassword.text.toString()
         context?.showToastShort(getString(R.string.success_register))
         val bundle: Bundle = Bundle().apply {
-            putString(EMAIL, email)
-            putString(PASSWORD, password)
+            putString("email", email)
+            putString("password", password)
         }
-        setBackStackData(BUNDLE_KEY, bundle, true)
+        setBackStackData("bundleKey", bundle, true)
     }
 
     private fun registerFailed() {
         context?.showToastShort(getString(R.string.error_something_wrong))
-    }
-
-    companion object {
-        private const val EMAIL: String = "email"
-        private const val BUNDLE_KEY: String = "bundleKey"
-        private const val PASSWORD: String = "password"
     }
 }

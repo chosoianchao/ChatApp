@@ -34,12 +34,28 @@
         app:layout_constraintStart_toEndOf="@id/iv_avatar"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/iv_show_message"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_120"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:contentDescription="@null"
+        android:padding="@dimen/dp_10"
+        app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toEndOf="@id/iv_avatar"
+        app:layout_constraintTop_toTopOf="@id/tv_show_message"
+        app:layout_constraintWidth_percent="0.4" />
+
     <TextView
         android:id="@+id/tv_show_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_2"
         android:background="@drawable/bg_text_date"
+        android:padding="@dimen/dp_6"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/tv_show_message"
         app:layout_constraintStart_toEndOf="@id/tv_show_message"
@@ -57,4 +73,17 @@
         app:layout_constraintEnd_toEndOf="@id/tv_show_message"
         app:layout_constraintStart_toStartOf="@id/tv_show_message"
         app:layout_constraintTop_toBottomOf="@id/tv_show_message" />
+
+    <TextView
+        android:id="@+id/tv_image_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_text_date"
+        android:padding="@dimen/dp_6"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/iv_show_message"
+        app:layout_constraintStart_toStartOf="@id/iv_show_message"
+        app:layout_constraintTop_toBottomOf="@id/iv_show_message" />
 </androidx.constraintlayout.widget.ConstraintLayout>

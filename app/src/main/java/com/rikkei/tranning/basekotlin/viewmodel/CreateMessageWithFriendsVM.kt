@@ -19,7 +19,7 @@ class CreateMessageWithFriendsVM @Inject constructor() : BaseViewModel() {
     }
 
     fun getData() {
-        val getListFriends = mUser?.uid?.let { root?.child(FRIENDS)?.child(it) }
+        val getListFriends = mUser?.uid?.let { root?.child("Friends")?.child(it) }
         getListFriends?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -36,9 +36,5 @@ class CreateMessageWithFriendsVM @Inject constructor() : BaseViewModel() {
                 throw error.toException()
             }
         })
-    }
-
-    companion object {
-        private const val FRIENDS: String = "Friends"
     }
 }
