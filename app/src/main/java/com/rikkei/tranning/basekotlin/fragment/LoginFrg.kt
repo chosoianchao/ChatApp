@@ -7,7 +7,6 @@ import androidx.navigation.fragment.findNavController
 import com.rikkei.tranning.basekotlin.R
 import com.rikkei.tranning.basekotlin.base.BaseFragment
 import com.rikkei.tranning.basekotlin.databinding.FrgLoginBinding
-import com.rikkei.tranning.basekotlin.showToastLong
 import com.rikkei.tranning.basekotlin.showToastShort
 import com.rikkei.tranning.basekotlin.viewmodel.LoginVM
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +41,7 @@ class LoginFrg : BaseFragment<FrgLoginBinding>() {
                     context?.showToastShort(getString(R.string.text_password_validate))
                 }
                 else -> {
-                    viewModel.login(email, password, ::loginSuccess, ::loginFailed, ::validateEmail)
+                    viewModel.login(email, password, ::loginSuccess, ::loginFailed)
                 }
             }
         }
@@ -52,10 +51,6 @@ class LoginFrg : BaseFragment<FrgLoginBinding>() {
         viewBinding.textSignupNow.setOnClickListener {
             openRegisterFragment()
         }
-    }
-
-    private fun validateEmail() {
-        context?.showToastLong(getString(R.string.text_validated_email))
     }
 
     private fun accountExists() {

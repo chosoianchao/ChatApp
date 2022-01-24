@@ -1,9 +1,11 @@
 package com.rikkei.tranning.basekotlin.base
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -24,29 +26,41 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? = DataBindingUtil
         .inflate<B>(inflater, layoutResource, container, false)
         .apply { _viewBinding = this }
         .root
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initData()
     }
+
     protected abstract fun initData()
     protected abstract fun initViews()
 
-     fun <T : Any> Fragment.getBackStackData(key: String, result: (T) -> (Unit)) {
+    fun <T : Any> Fragment.getBackStackData(key: String, result: (T) -> (Unit)) {
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<T>(key)
             ?.observe(viewLifecycleOwner) {
                 result(it)
             }
     }
 
-     fun <T : Any> Fragment.setBackStackData(key: String, data: T, doBack: Boolean = true) {
+    fun <T : Any> Fragment.setBackStackData(key: String, data: T, doBack: Boolean = true) {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, data)
         if (doBack)
             findNavController().popBackStack()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(context, "landscape", Toast.LENGTH_SHORT).show()
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            Toast.makeText(context, "portrait", Toast.LENGTH_SHORT).show()
+        }
     }
 }

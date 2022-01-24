@@ -67,6 +67,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 R.id.chatRoomFrg -> {
                     mBinding?.groupBottomNav?.visibility = View.GONE
                 }
+                R.id.tabAllFrg -> {
+                    mBinding?.groupBottomNav?.visibility = View.GONE
+                }
             }
         }
     }
