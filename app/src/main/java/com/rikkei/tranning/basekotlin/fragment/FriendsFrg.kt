@@ -43,15 +43,15 @@ class FriendsFrg : BaseFragment<FrgFriendsBinding>(), OnActionCallBack {
             )
         )
         showListFriends()
-        viewModel.liveListFriends.observe(this, {
+        viewModel.liveListFriends.observe(this) {
             friendsAdapter = viewBinding.rvListFriend.adapter as FriendsAdapter
             friendsAdapter!!.updateFriendsListItems(it)
-        })
+        }
         showListSearch()
-        viewModel.liveListSearch.observe(this, {
+        viewModel.liveListSearch.observe(this) {
             friendsAdapter = viewBinding.rvListFriend.adapter as FriendsAdapter
             friendsAdapter!!.updateFriendsListItems(it)
-        })
+        }
     }
 
     private fun showListSearch() {

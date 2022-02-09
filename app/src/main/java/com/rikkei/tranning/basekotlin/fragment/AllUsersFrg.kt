@@ -27,10 +27,10 @@ class AllUsersFrg : BaseFragment<FrgAllUsersFrBinding>() {
 
     override fun initViews() {
         showListRequest()
-        viewModel.liveListRequest.observe(this, {
+        viewModel.liveListRequest.observe(this) {
             val userAdapter: RequestAdapter = viewBinding.rvListUser.adapter as RequestAdapter
             userAdapter.updateUserListItems(it)
-        })
+        }
     }
 
     private fun showListRequest() {

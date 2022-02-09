@@ -3,6 +3,7 @@ package com.rikkei.tranning.basekotlin.fragment
 import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -22,8 +23,8 @@ import com.rikkei.tranning.basekotlin.databinding.FrgModifyInformationBinding
 import com.rikkei.tranning.basekotlin.showToastLong
 import com.rikkei.tranning.basekotlin.viewmodel.ModifyInformationVM
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.*
-
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 @AndroidEntryPoint
 class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
@@ -100,7 +101,7 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
             )
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setTitle(getString(R.string.text_add_photo))
-        builder.setItems(options) { dialog, item ->
+        builder.setItems(options, fun(dialog: DialogInterface, item: Int) {
             when {
                 options[item] == getString(R.string.text_take_photo) -> {
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -117,7 +118,7 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
                     dialog.dismiss()
                 }
             }
-        }
+        })
         builder.show()
     }
 
@@ -163,7 +164,7 @@ class ModifyInformationFrg : BaseFragment<FrgModifyInformationBinding>() {
                 viewBinding.edtFullName.setText(name.toString())
                 viewBinding.edtPhone.setText(phone.toString())
                 viewBinding.edtDate.setText(date.toString())
-                viewBinding.edtDesc.setText(date.toString())
+                viewBinding.edtDesc.setText(desc.toString())
                 viewBinding.ivAvatar.setImageResource(R.drawable.ic_user)
             }
             else -> {
